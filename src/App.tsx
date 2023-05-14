@@ -1,17 +1,17 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import React from 'react';
-import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
+import AppRouter from './modules/AppRouter';
+import NavBar from './modules/NavBar';
+import Footer from './modules/Footer';
 
 function App() {
   return (
-    <BrowserRouter basename="Workout-Tracker/">
-      <Routes>
-        <Route path="/" element={<Home />}/>
-      </Routes>
-    </BrowserRouter>
+    <>
+      <NavBar />
+      <AppRouter />
+      <Footer />
+    </>
   );
 }
 
