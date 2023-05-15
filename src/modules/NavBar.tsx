@@ -11,6 +11,9 @@ function NavBar(): React.ReactElement {
         <li className="nav-item">
           <Link to="/CreateWorkout" className="nav-link">Create Workout</Link>
         </li>
+        <li className="nav-item">
+          <Link to="/Presets" className="nav-link">Presets</Link>
+        </li>
       </ul>
     </nav>
   );
