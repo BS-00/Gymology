@@ -1,7 +1,8 @@
 import React, { useRef } from 'react';
 
-function IncNumInput(props: {minVal: number, id: string, label: string}): React.ReactElement {
+function IncNumInput(props: {minVal: number, id: string, label: string, amnt?: number}): React.ReactElement {
   let inputRef = useRef<HTMLInputElement>(null);
+  const defaultAmnt: number = 1;
   
   function addVal(val: number) {
     if (inputRef.current !== null) {
@@ -15,9 +16,9 @@ function IncNumInput(props: {minVal: number, id: string, label: string}): React.
     <div className="my-2 form-group">
       <label htmlFor={props.id} className="form-label">{props.label}</label>
       <div className="input-group">
-        <button type="button" className="btn btn-outline-danger" onClick={() => addVal(-1)}>-</button>
+        <button type="button" className="btn btn-outline-danger" onClick={() => addVal(props.amnt == null ? -defaultAmnt : -props.amnt!)}>-</button>
         <input ref={inputRef} id={props.id} type="number" min={props.minVal} className="form-control" defaultValue={props.minVal}/>
-        <button type="button" className="btn btn-outline-success" onClick={() => addVal(1)}>+</button>
+        <button type="button" className="btn btn-outline-success" onClick={() => addVal(props.amnt == null ? defaultAmnt : props.amnt!)}>+</button>
       </div>
     </div>
   );
