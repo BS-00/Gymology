@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import CreateWorkout from '../pages/CreateWorkout';
 import Login from '../pages/Login';
+import Presets from '../pages/Presets';
 
 function AppRouter() {
   return (
@@ -13,6 +14,7 @@ function AppRouter() {
         <Route path="/" element={<Home />}/>
         <Route path="/CreateWorkout" element={<CreateWorkout />}/>
         <Route path="/Login" element={<Login />}/>
+        <Route path="/Presets" element={<Presets />}/>
       </Routes>
     </div>
   );

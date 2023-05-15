@@ -14,6 +14,9 @@ function NavBar(): React.ReactElement {
         <li className="nav-item">
           <Link to="/Login" className="nav-link">Login</Link>
         </li>
+        <li className="nav-item">
+          <Link to="/Presets" className="nav-link">Presets</Link>
+        </li>
       </ul>
     </nav>
   );
