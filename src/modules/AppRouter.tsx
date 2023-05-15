@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 //Pages
 import Home from '../pages/Home';
 import CreateWorkout from '../pages/CreateWorkout';
+import Login from '../pages/Login';
 
 function AppRouter() {
   return (
@@ -11,6 +12,7 @@ function AppRouter() {
       <Routes>
         <Route path="/" element={<Home />}/>
         <Route path="/CreateWorkout" element={<CreateWorkout />}/>
+        <Route path="/Login" element={<Login />}/>
       </Routes>
     </div>
   );
