@@ -1,11 +1,13 @@
+require('dotenv').config()
 const express = require('express');
+
+const PORT = process.env.PORT;
 const app = express();
-const PORT = 3001;
 
 app.listen(PORT, (error) => {
     if (error) {
       console.log("Backend error: " + error);
       return;
     }
-    console.log("ExpressJS server running on port " + PORT);
+    console.log("ExpressJS server listening on port " + PORT);
 });
