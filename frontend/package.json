@@ -1,6 +1,7 @@
 {
-  "name": "workout-tracker",
+  "name": "workout-tracker-frontend",
   "version": "0.1.0",
+  "description": "React app for tracking workout stats",
   "homepage": "https://bs-00.github.io/Workout-Tracker/",
   "private": true,
   "dependencies": {
@@ -31,6 +32,14 @@
       "react-app/jest"
     ]
   },
+  "repository": {
+    "type": "git",
+    "url": "https://bs-00.github.io/Workout-Tracker/"
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0",
+    "react-scripts": "5.0.1"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -42,9 +51,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "gh-pages": "^5.0.0",
-    "react-scripts": "5.0.1"
   }
 }
