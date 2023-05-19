@@ -1,0 +1,20 @@
+{
+  "name": "workout-tracker-backend",
+  "version": "1.0.0",
+  "description": "ExpressJS server to handle requests from the Workout Tracker frontend",
+  "main": "./src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://bs-00.github.io/Workout-Tracker/"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "scripts": {
+      "start": "nodemon start index.js",
+      "deploy": "echo no deploy script specified for the backend"
+  }
+}
