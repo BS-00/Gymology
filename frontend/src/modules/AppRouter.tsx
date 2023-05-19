@@ -6,6 +6,7 @@ import Home from '../pages/Home';
 import CreateWorkout from '../pages/CreateWorkout';
 import Login from '../pages/Login';
 import Presets from '../pages/Presets';
+import About from '../pages/About';
 
 function AppRouter() {
   return (
@@ -15,6 +16,7 @@ function AppRouter() {
         <Route path="/CreateWorkout" element={<CreateWorkout />}/>
         <Route path="/Login" element={<Login />}/>
         <Route path="/Presets" element={<Presets />}/>
+        <Route path="/About" element={<About />}/>
       </Routes>
     </div>
   );
