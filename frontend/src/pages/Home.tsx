@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ButtonComponent from '../modules/Button';
-import DaysOfWeekSelector from '../modules/DaysOfWeekSelector';
-
+//import DaysOfWeekSelector from '../modules/DaysOfWeekSelector';
 
 
 function ButtonDisplay() {
@@ -20,6 +19,7 @@ function ButtonDisplay() {
 
 function Home(): React.ReactElement {
   return (
+    
     <>
     <h1 className="display-5 text-center">Welcome to the Home Page!</h1>
     <ButtonDisplay/>
