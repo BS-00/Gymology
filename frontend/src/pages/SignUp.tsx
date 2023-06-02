@@ -10,8 +10,6 @@ const SignUp = () => (
       <EmailTextBox label="Email" />
       <div style={{ marginTop: '8px' }} />
       <PasswordTextBox label="Password" />
-      <div style={{ marginTop: '8px' }} />
-      <PasswordTextBox label="Confirm Password" />
       <Link to="/Login" className="my-2 btn btn-primary" style={{ width: '100%' }}>
         Sign Up
       </Link>
