@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import ButtonComponent from '../modules/Button';
 //import DaysOfWeekSelector from '../modules/DaysOfWeekSelector';
-
+import imageSrc from '../modules/Logo.png'
 
 function ButtonDisplay() {
   return (
     <>
+       <div style={{ position: 'fixed', top: '13%', marginLeft: '30%' }}>
+        <img src={imageSrc} alt="Image Description" style={{ width: '140%', height: 'auto', borderRadius: '10px' }} />
+       </div>
       <div style={{fontSize:'30px',marginTop:'300px',marginLeft:'50px',marginBottom:'50px',width:'300px'}}>
         <ButtonComponent destination="/CreateWorkout" text="Create Workout" />
       </div>
