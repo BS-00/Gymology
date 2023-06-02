@@ -1,6 +1,7 @@
 import React from 'react';
 import EmailTextBox from '../modules/EmailTextBox';
 import PasswordTextBox from '../modules/PasswordTextBox';
+import { Link } from 'react-router-dom';
 
 const SignUp = () => (
   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
@@ -11,12 +12,12 @@ const SignUp = () => (
       <PasswordTextBox label="Password" />
       <div style={{ marginTop: '8px' }} />
       <PasswordTextBox label="Confirm Password" />
-      <button type="submit" className="my-2 btn btn-primary" style={{ width: '100%' }}>
+      <Link to="/Login" className="my-2 btn btn-primary" style={{ width: '100%' }}>
         Sign Up
-      </button>
+      </Link>
       <div style={{ marginTop: '8px', textAlign: 'center' }}>
         <span>Already have an account? </span>
-        <a href="Login">Login</a>
+        <Link to="/Login">Login</Link>
       </div>
     </div>
   </div>
