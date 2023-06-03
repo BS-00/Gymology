@@ -15,7 +15,7 @@ function About(): React.ReactElement {
       </div>
       <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <p className="fs-6">
-          Made by Brandon Skarka, Dawit Taddase, Jan Kasen, and Jesus Muniz Garcia.
+          Made by Brandon Skarka, Dawit Taddese, Jan Kasen, and Jesus Muniz Garcia.
         </p>
         <p className="fs-6">
           UCLA CS 35L Software Construction Project. Spring 2023.
