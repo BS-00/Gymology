@@ -1,8 +1,8 @@
 function About(): React.ReactElement {
   return (
     <div className="container d-flex flex-column justify-content-between align-items-center" style={{ minHeight: '93vh' }}>
-      <div style={{ textAlign: 'justify' }}>
-        <h1 className="display-3">About Gymology</h1>
+      <h1 className="display-3">About Gymology</h1>
+      <div style={{ textAlign: 'center' }}>
         <p className="fs-3">
           Gymology is your ultimate fitness companion! Here you can find the tools to create any kind of workout plan that is suited for both beginners and certified gym bros.
         </p>
