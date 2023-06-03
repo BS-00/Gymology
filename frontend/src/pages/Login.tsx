@@ -11,12 +11,12 @@ const Login = () => {
         <EmailTextBox label="Email" />
         <div style={{ marginTop: '8px' }} />
         <PasswordTextBox label="Password" />
-        <Link to="/" className="my-2 btn btn-primary" style={{ width: '100%' }}>
+        <Link to="/" className="my-2 btn btn-primary" style={{ width: '100%'}}>
           Login
         </Link>
         <div style={{ marginTop: '8px', textAlign: 'center' }}>
           <span>Don't have an account? </span>
-          <Link to="/signup">Sign Up</Link>
+          <Link to="/SignUp">Sign Up</Link>
         </div>
       </div>
     </div>
