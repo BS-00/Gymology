@@ -1,6 +1,6 @@
 function About(): React.ReactElement {
   return (
-    <div className="container d-flex flex-column justify-content-between align-items-center" style={{ minHeight: '100vh' }}>
+    <div className="container d-flex flex-column justify-content-between align-items-center" style={{ minHeight: '93vh' }}>
       <div style={{ textAlign: 'justify' }}>
         <h1 className="display-3">About Gymology</h1>
         <p className="fs-3">
@@ -13,7 +13,7 @@ function About(): React.ReactElement {
           Join Gymology today to embrace a fitness lifestyle with science!
         </p>
       </div>
-      <div style={{ textAlign: 'center', marginBottom: '6rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <p className="fs-6">
           Made by Brandon Skarka, Dawit Taddase, Jan Kasen, and Jesus Muniz Garcia.
         </p>
