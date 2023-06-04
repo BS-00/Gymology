@@ -1,3 +1,5 @@
 # Workout-Tracker
 CS35L Full Stack Web Project
-Created using React, Typescript, and Bootstrap
+
+Frontend: React, Bootstrap, Typescript, and Node
+Backend: Express, MySQL, and Node
