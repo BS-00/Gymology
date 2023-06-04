@@ -7,8 +7,8 @@
     "url": "https://bs-00.github.io/Workout-Tracker/"
   },
   "scripts": {
-      "start": "concurrently \"cd ./frontend && npm start\" \"cd ./backend && npm start\"",
-      "deploy": "concurrently \"cd ./frontend && npm deploy\" \"cd ./backend && npm deploy\""
+      "start": "concurrently \"cd ./frontend && npm start\" \"cd ./backend/express && npm start\" \"sh ./backend/database/init_db.sh\"",
+      "deploy": "concurrently \"cd ./frontend && npm deploy\" \"cd ./backend/express && npm deploy\""
   },
   "devDependencies": {
     "concurrently": "^8.0.1"
