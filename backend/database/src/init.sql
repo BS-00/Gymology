@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS gymologydb;
+CREATE DATABASE gymologydb;
