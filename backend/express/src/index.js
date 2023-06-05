@@ -1,8 +1,8 @@
-require('dotenv').config()
-const express = require('express');
+require('dotenv').config({path: '../../.env'});
 
-const PORT = process.env.PORT;
+const express = require('express');
 const app = express();
+const PORT = process.env.EXPRESS_PORT;
 
 app.listen(PORT, (error) => {
     if (error) {
