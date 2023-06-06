@@ -20,9 +20,20 @@ const SignUp = () => {
 
   const handleSignUp = () => {
     if (email.trim() === '' || password.trim() === '') {
-      console.log('Email and Password required');
+      window.alert('Email and Password are required.');
       return;
     }
+
+    if (!validateEmail(email)) {
+      window.alert('Invalid email format.');
+      return;
+    }
+
+    if (!validatePassword(password)) {
+      window.alert('Password must be at least 6 characters long.');
+      return;
+    }
+
     setIsLoading(true);
     axios
       .post('http://localhost:3001/signup', { email, password })
@@ -32,10 +43,21 @@ const SignUp = () => {
       })
       .catch((error) => {
         console.error('Failed to sign up:', error);
+        window.alert('Sign up failed. Please try again.');
       })
       .finally(() => {
         setIsLoading(false);
       });
+  };
+
+  const validateEmail = (email: string) => {
+    // Regular expression for email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password: string) => {
+    return password.length >= 6;
   };
 
   return (

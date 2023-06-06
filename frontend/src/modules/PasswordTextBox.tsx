@@ -32,7 +32,7 @@ const PasswordTextBox: React.FC<PasswordTextBoxProps> = ({ label, onChange }) =>
       />
       {!isValid && (
         <p style={{ color: 'red', margin: '4px 0', fontSize: '14px' }}>
-          Password should be at least 6 characters long
+          Password must be at least 6 characters long
         </p>
       )}
     </div>
