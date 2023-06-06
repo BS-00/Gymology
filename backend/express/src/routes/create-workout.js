@@ -20,17 +20,18 @@ weight: positive int
 */
 
 router.post('/create-workout', (req, res) => {
-	queryDb(`INSERT INTO Workouts(uid, name, days) VALUES(${0, req.name, req.days})`,
-			(rows, fields) => {
-				console.log("ROWS: ", rows);
-				console.log("FIELDS: ", fields);
+	const uid = 1;
+	queryDb(`INSERT INTO Workouts(uid, name, days) VALUES('${uid}', '${req.body.name}', '${req.body.days.join()}');`,
+			(rows) => {
+				//Inserts each exercise into the database once the workout has been inserted
+				const wid = rows.insertId;
+				req.body.exercises.forEach(exercise => {
+					queryDb(`INSERT INTO Exercises(wid, name, sets, reps, weight) VALUES('${wid}', '${exercise.name}', '${exercise.sets}', '${exercise.reps}', '${exercise.weight}');`,
+							() => {}
+					);
+				});
 			}
 	);
-	/*
-	for (exercise in req.exercises) {
-	queryDb("INSERT INTO Exercises(wid, sets, reps, weight)", );
-	}
-	*/
 });
 
 module.exports = router;
