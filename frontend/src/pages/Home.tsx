@@ -1,7 +1,6 @@
 import React, { useState , useEffect } from 'react';
 import ButtonComponent from '../modules/Button';
 import imageSrc from '../modules/Icon.png';
-//import themeChanger from 'themes.tsx'
 import '../themes.css';
 
 
@@ -30,12 +29,11 @@ function ButtonDisplay() {
 
 
 function Home(): React.ReactElement {
-
   const [theme, setTheme] = useState('light');
   const toggleTheme = () => {
     if (theme === 'light') {
       setTheme('dark');
-    } else {
+    }else {
       setTheme('light');
     }
   };
@@ -45,13 +43,11 @@ function Home(): React.ReactElement {
 
   return (
     <>
-  
-
-    <h1 className="display-5 text-center">Welcome to the Home Page!</h1>
-    <ButtonDisplay/>
-    <div className={`App ${theme}`}>
-      <button className="btn btn-primary position-absolute bottom-0 end-0" style={{backgroundColor: 'black', borderColor: 'white'}} onClick={toggleTheme}>Toggle Theme</button>
-    </div>
+      <h1 className="display-5 text-center">Welcome to the Home Page!</h1>
+      <ButtonDisplay/>
+      <div className={`App ${theme}`}>
+        <button className="btn btn-primary position-absolute bottom-0 end-0" style={{backgroundColor: 'black', borderColor: 'white'}} onClick={toggleTheme}>Toggle Theme</button>
+      </div>
     </>
   );
 }

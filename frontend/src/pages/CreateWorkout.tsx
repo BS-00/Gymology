@@ -4,9 +4,9 @@ import DaysOfWeekSelector from '../modules/DaysOfWeekSelector';
 
 function ExerciseDisplay(props: {name: String}): React.ReactElement {
     return (
-	<>
-	    <p>{props.name}</p>
-	</>
+      <div className="text-center">
+	      <p>{props.name}</p>
+	    </div>
     );
 }
 
