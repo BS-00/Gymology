@@ -21,7 +21,6 @@ if [[ $* != *--noinit* ]]; then
     mysql -h${MYSQL_HOST} -P${MYSQL_PORT} -u${MYSQL_USER} -p${MYSQL_PASS} -e "${INIT_CMD}" \
     2>&1 | grep -v "Using a password on the command line"
     
-    
     if [ ${PIPESTATUS[0]} -eq 0 ]; then
       echo "Success"
     else
@@ -38,7 +37,7 @@ fi
 # Ignores the command line password is insecure error
 echo "Initializing ${MYSQL_DB_NAME}..."
 for FILE in "${FILES[@]}"; do
-	mysql -h${MYSQL_HOST} -P${MYSQL_PORT} -u${MYSQL_USER} -p${MYSQL_PASS} \
+	mysql -h${MYSQL_HOST} -P${MYSQL_PORT} -u${MYSQL_USER} -p${MYSQL_PASS} -D${MYSQL_DB_NAME} \
 	<"${SRC}/${FILE}" 2>&1 \
 	| grep -v "Using a password on the command line"
 	
