@@ -95,7 +95,7 @@ const PresetsList: React.FC = () => {
           },
         ],
       },
-      
+
     ];
 
     setPresets(availablePresets);
@@ -118,7 +118,7 @@ const PresetsList: React.FC = () => {
       <div className="row">
         <div className="col-6">
           <div className="presets-list">
-            <h2>Presets</h2>
+            <h2>Search Workouts</h2>
             <input
               type="text"
               placeholder="Search"
@@ -141,7 +141,7 @@ const PresetsList: React.FC = () => {
         </div>
         <div className="col-6">
           <div className="selectedpreset-contents">
-            <h2>Selected Preset</h2>
+            <h2>Selected Workout</h2>
             {selectedPreset ? (
               <div>
                 <h3>{selectedPreset.plan_name}</h3>
