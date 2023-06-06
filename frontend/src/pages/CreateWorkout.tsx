@@ -19,11 +19,11 @@ type WorkoutType = {
 
 
 function ExerciseDisplay(props: {name: String}): React.ReactElement {
-  return (
-		<>
-			<p>{props.name}</p>
-		</>
-  );
+    return (
+      <div className="text-center">
+	      <p>{props.name}</p>
+	    </div>
+    );
 }
 
 function CreateWorkout(): React.ReactElement {
