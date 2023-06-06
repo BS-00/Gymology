@@ -1,16 +1,15 @@
 /* Default theme */
 
-body {
+.light {
     background-color: #185487;
-    color: #F6F1F1;
+    color: #ffffff;
   }
   
 
 
-
   /* Dark theme */
-/*  body.dark-theme {
+
+.dark {
     background-color: #1e1e1e;
     color: #ffffff;
-  }
-*/
+}
