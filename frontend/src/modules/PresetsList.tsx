@@ -17,6 +17,7 @@ interface Workout {
 const PresetsList: React.FC = () => {
   const [presets, setPresets] = useState<Preset[]>([]);
   const [selectedPreset, setSelectedPreset] = useState<Preset | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   useEffect(() => {
     const availablePresets: Preset[] = [
@@ -38,6 +39,7 @@ const PresetsList: React.FC = () => {
           },
         ],
       },
+
       {
         plan_name: 'Intermediate',
         days_of_the_week: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
@@ -62,6 +64,7 @@ const PresetsList: React.FC = () => {
           },
         ],
       },
+
       {
         plan_name: 'Advanced',
         days_of_the_week: ['Monday', 'Wednesday', 'Friday', 'Saturday'],
@@ -92,6 +95,7 @@ const PresetsList: React.FC = () => {
           },
         ],
       },
+      
     ];
 
     setPresets(availablePresets);
@@ -101,18 +105,32 @@ const PresetsList: React.FC = () => {
     setSelectedPreset(preset);
   };
 
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredPresets = presets.filter((preset) =>
+    preset.plan_name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="container">
       <div className="row">
         <div className="col-6">
           <div className="presets-list">
             <h2>Presets</h2>
+            <input
+              type="text"
+              placeholder="Search"
+              value={searchQuery}
+              onChange={handleSearch}
+            />
             <ul>
-              {presets.map((preset) => (
+              {filteredPresets.map((preset) => (
                 <li key={preset.plan_name}>
                   <input
                     type="checkbox"
-                    checked={selectedPreset && (selectedPreset.plan_name === preset.plan_name) ? true : false}
+                    checked={selectedPreset !==null && selectedPreset.plan_name === preset.plan_name}
                     onChange={() => handlePresetChange(preset)}
                   />
                   <label>{preset.plan_name}</label>
@@ -127,9 +145,7 @@ const PresetsList: React.FC = () => {
             {selectedPreset ? (
               <div>
                 <h3>{selectedPreset.plan_name}</h3>
-                <p>
-                  Days of the week: {selectedPreset.days_of_the_week.join(', ')}
-                </p>
+                <p>Days of the week: {selectedPreset.days_of_the_week.join(', ')}</p>
                 <h4>Workouts:</h4>
                 <ul>
                   {selectedPreset.workouts.map((workout, index) => (
