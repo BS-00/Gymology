@@ -58,7 +58,7 @@ function CreateWorkout(): React.ReactElement {
         </div>
         <div className="m-3 w-50 h-75">
 	  <h3 className="text text-center">Exercises</h3>
-	  <button className="btn btn-secondary" onClick={e => addExercise(e)}>Add Exercise</button>  
+	  <button className="btn btn-primary" onClick={e => addExercise(e)}>Add Exercise</button>  
 	  <div className="h-75 overflow-auto">
 	    {exerciseDisplays}
           </div>
