@@ -7,7 +7,7 @@ SRC="${BASH_PATH}/src"
 # Path to environment variables
 ENV="${BASH_PATH}/.."
 # Files in SRC to be executed
-FILES=('init.sql' 'tables.sql')
+FILES=('tables.sql')
 
 # Initializes environment variables
 source "${ENV}/.env"
