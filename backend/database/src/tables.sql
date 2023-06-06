@@ -10,7 +10,7 @@ CREATE TABLE Workouts (
 	wid SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
 	uid SMALLINT UNSIGNED,
 	name TEXT NOT NULL,
-	days SET('M', 'TU', 'W', 'TH', 'F', 'SA ', 'SU'),
+	days SET('M', 'TU', 'W', 'TH', 'F', 'SA', 'SU'),
 		
 	PRIMARY KEY(wid),
 	FOREIGN KEY(uid)
