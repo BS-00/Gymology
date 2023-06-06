@@ -75,6 +75,7 @@ const ParentComponent: React.FC = () => {
   return (
     <div>
       <EmailTextBox label="Email" />
+      <div style={{ marginTop: '8px' }} />
       <PasswordTextBox label="Password" />
     </div>
   );
