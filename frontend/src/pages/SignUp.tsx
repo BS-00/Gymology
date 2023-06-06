@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import EmailTextBox from '../modules/EmailTextBox';
 import PasswordTextBox from '../modules/PasswordTextBox';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleEmailChange = (value: string) => {
     setEmail(value);
@@ -19,7 +20,7 @@ const SignUp = () => {
 
   const handleSignUp = () => {
     if (email.trim() === '' || password.trim() === '') {
-      console.log('Email and password are required');
+      console.log('Email and Password required');
       return;
     }
     setIsLoading(true);
@@ -27,6 +28,7 @@ const SignUp = () => {
       .post('http://localhost:3001/signup', { email, password })
       .then((response) => {
         console.log('User signed up successfully');
+        navigate('/Login');
       })
       .catch((error) => {
         console.error('Failed to sign up:', error);
