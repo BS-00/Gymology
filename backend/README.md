@@ -4,5 +4,6 @@ MYSQL_USER
 MYSQL_PASS
 MYSQL_HOST (127.0.0.1 for local hosting)
 MYSQL_PORT (3306 is the default for mysql servers)
+MYSQL_DB_NAME (name of the database, can be anything)
 
 ESPRESS_PORT (any available port number, ex: 3001)
