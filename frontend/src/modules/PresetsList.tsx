@@ -193,7 +193,7 @@ const PresetsList: React.FC = () => {
                 </div>
               </div>
             ) : (
-              <p>No preset selected</p>
+              <p>No workout selected</p>
             )}
           </div>
         </div>
