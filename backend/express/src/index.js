@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 
 //Routes
 app.use(require('./routes/create-workout'));
+app.use(require('./routes/presets'));
 app.use(require('./routes/signup'));
 app.use(require('./routes/login'));
 
