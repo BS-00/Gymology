@@ -11,8 +11,9 @@ router.post('/login', (req, res) => {
       res.status(401).json({ message: 'Invalid credentials' });
       console.log('Invalid credentials');
     } else {
-      console.log('Login successful');
-      res.status(200).json({ message: 'Login successful' });
+      const uid = rows[0].uid; 
+      res.status(200).json({ message: 'Login successful', uid });
+      console.log('Login successful. User UID:', uid);
     }
   });
 });

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import EmailTextBox from '../modules/EmailTextBox';
 import PasswordTextBox from '../modules/PasswordTextBox';
@@ -9,6 +9,13 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if the user is already logged in
+    if (sessionStorage.getItem('isLoggedIn')) {
+      navigate('/');
+    }
+  }, [navigate]);
 
   const handleEmailChange = (value: string) => {
     setEmail(value);
@@ -33,7 +40,10 @@ const Login = () => {
     axios
       .post('http://localhost:3001/login', { email, password })
       .then((response) => {
-        console.log('Login successful');
+        const { uid } = response.data; 
+        console.log('Login successful. User ID:', uid);
+        sessionStorage.setItem('isLoggedIn', 'true'); 
+        sessionStorage.setItem('uid', uid);
         navigate('/');
       })
       .catch((error) => {
