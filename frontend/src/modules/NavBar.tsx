@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import imageSrc from '../modules/Icon.png'
+import imageSrc from '../assets/Icon.png';
 
 function NavBar(): React.ReactElement {
   return (

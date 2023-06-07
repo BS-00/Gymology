@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ButtonComponent from '../modules/Button';
-import imageSrc from '../modules/Icon.png';
+import imageSrc from '../assets/Icon.png';
 import '../themes.css';
 
 function ButtonDisplay() {
