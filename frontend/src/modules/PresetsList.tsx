@@ -155,6 +155,7 @@ const PresetsList: React.FC = () => {
               value={searchQuery}
               onChange={handleSearch}
             />
+            <div className="border" style={{ height: '450px', overflow: 'auto'}}>
             <ul>
               {filteredPresets.map((preset) => (
                 <li key={preset.plan_name}>
@@ -167,6 +168,7 @@ const PresetsList: React.FC = () => {
                 </li>
               ))}
             </ul>
+            </div>
           </div>
         </div>
         <div className="col-6">
@@ -177,6 +179,7 @@ const PresetsList: React.FC = () => {
                 <h3>{selectedPreset.plan_name}</h3>
                 <p>Days of the week: {selectedPreset.days_of_the_week.join(', ')}</p>
                 <h4>Workouts:</h4>
+                <div className="border" style={{ height: '350px', overflow: 'auto'}}>
                 <ul>
                   {selectedPreset.workouts.map((workout, index) => (
                     <li key={index}>
@@ -187,6 +190,7 @@ const PresetsList: React.FC = () => {
                     </li>
                   ))}
                 </ul>
+                </div>
               </div>
             ) : (
               <p>No preset selected</p>
