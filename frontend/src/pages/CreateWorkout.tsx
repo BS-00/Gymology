@@ -78,7 +78,8 @@ function CreateWorkout(): React.ReactElement {
 			exercises: exercises
 		};
 		
-		await Axios.post('http://localhost:3001/create-workout', {uid: uid, workout: workout});
+		await Axios.post(process.env.REACT_APP_API_URL+'/create-workout',
+						 {uid: uid, workout: workout});
 	}
 
 
