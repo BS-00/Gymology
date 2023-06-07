@@ -18,13 +18,14 @@ type WorkoutType = {
 };
 
 
-function ExerciseDisplay(props: {exercise: ExerciseType}): React.ReactElement {
+function ExerciseDisplay(props: {index: number, exercise: ExerciseType, removeExercise: (i: number, e: ChangeEvent<EventTarget>) => void}): React.ReactElement {
     return (
-		<div className="row border-bottom">
+		<div className="row overflow-hidden border-bottom">
 			<p className="col-4"> {String(props.exercise.name)} </p>
 			<p className="col"> {String(props.exercise.sets)} </p>
 			<p className="col"> {String(props.exercise.reps)} </p>
 			<p className="col"> {String(props.exercise.weight)} </p>
+			<button onClick={e => props.removeExercise(props.index, e)} className="fs-3 p-0 m-0 col-sm btn btn-primary"><strong>-</strong></button>
 	    </div>
     );
 }
@@ -37,9 +38,6 @@ function CreateWorkout(): React.ReactElement {
     	document.body.className = theme;
   	}, [theme]);
 
-
-	const [exerciseDisplays, setExerciseDisplays] = useState<Array<React.ReactElement>>([]);
-	
 	const [workoutName, setWorkoutName] = useState<string>("");
 	const [days, setDays] = useState<Array<string>>([]);
 
@@ -47,7 +45,7 @@ function CreateWorkout(): React.ReactElement {
 	const [exerciseName, setExerciseName] = useState<string>("");
 	const [sets, setSets] = useState<number>(1);
 	const [reps, setReps] = useState<number>(1);
-	const [weight, setWeight] = useState<number>(1);
+	const [weight, setWeight] = useState<number>(0);
 	
 	function addExercise(e: ChangeEvent<EventTarget>) {
 		e.preventDefault();
@@ -61,17 +59,29 @@ function CreateWorkout(): React.ReactElement {
 		
 		setExercises(oldExercises => [...oldExercises,  exercise]);
 	}
+
+	function removeExercise(i: number, e: ChangeEvent<EventTarget>) {
+		e.preventDefault();
+		setExercises(oldExercises => oldExercises.filter((e, ei) => ei != i));
+	}
 	
 	async function submitWorkout(e: ChangeEvent<EventTarget>) {
+		if (sessionStorage.getItem('uid') == null || 
+			sessionStorage.getItem('uid') == undefined) {
+			throw new RangeError('Uid is null or undefined');
+		}
+
+		const uid = sessionStorage.getItem('uid');
 		const workout: WorkoutType = {
 			name: workoutName,
 			days: days,
 			exercises: exercises
 		};
 		
-		await Axios.post('http://localhost:3001/create-workout', workout);
+		await Axios.post('http://localhost:3001/create-workout', {uid: uid, workout: workout});
 	}
-	
+
+
 	return (
 		<>
 			<h1 className="display-5 text-center">Create Workout</h1>
@@ -100,13 +110,15 @@ function CreateWorkout(): React.ReactElement {
 				<div className="m-3 w-50 h-75">
 					<h3 className="text text-center">Exercises</h3>  
 			        <div className="h-75 overflow-auto container">
-						<div className="row border-bottom border-2">
+						<div className="row overflow-hidden border-bottom border-2">
 							<h6 className="h6 col-4">Name</h6>
 							<h6 className="h6 col">Sets</h6>
 							<h6 className="h6 col">Reps</h6>
 							<h6 className="h6 col">Weight</h6>
 						</div>
-						{exercises.map(exercise => <ExerciseDisplay exercise={exercise} />)}
+						{exercises.map((exercise, i) => 
+							<ExerciseDisplay key={i} index={i} removeExercise={removeExercise} exercise={exercise} />
+						)}
 					</div>
 				</div>
       		</div>
