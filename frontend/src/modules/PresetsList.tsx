@@ -190,7 +190,9 @@ const PresetsList: React.FC = () => {
       <div className="row">
         <div className="col-6">
           <div className="presets-list">
+            <div className="text-center">
             <h2>Search Workouts</h2>
+            </div>
             <input
               type="text"
               placeholder="Search"
@@ -214,31 +216,33 @@ const PresetsList: React.FC = () => {
           </div>
         </div>
         <div className="col-6">
-          <div className="selectedpreset-contents">
+          <div className="selectedpreset-contents" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center',marginTop:"15%" }}>
             <h2>Selected Workout</h2>
-            {selectedPreset ? (
-              <div>
-                <h3>{selectedPreset.plan_name}</h3>
-                <p>Days of the week: {String(selectedPreset.days_of_the_week)}</p>
-                <h4>Workouts:</h4>
-                <div className="border" style={{ height: '350px', overflow: 'auto'}}>
-                <ul>
-                  {selectedPreset.workouts.map((workout, index) => (
-                    <li key={index}>
-                      <p>Workout Name: {workout.workout_name}</p>
-                      <p>Sets: {workout.sets}</p>
-                      <p>Reps: {workout.reps}</p>
-                      <p>Weight: {workout.weight}</p>
-                    </li>
-                  ))}
-                </ul>
-                </div>
-              </div>
-            ) : (
-              <p>No workout selected</p>
-            )}
-          </div>
-        </div>
+          {selectedPreset ? (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <h3>{selectedPreset.plan_name}</h3>
+            <p>Days of the week: {String(selectedPreset.days_of_the_week)}</p>
+            <h4>Workouts:</h4>
+          <div className="border" style={{ height: '350px', width: '500px', overflow: 'auto', display: 'flex', flexDirection: 'column', boxSizing: 'border-box', border: '1px solid black', padding: '10px' }}>
+        <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
+        {selectedPreset.workouts.map((workout, index) => (
+          <li key={index}>
+            <p>Workout Name: {workout.workout_name}</p>
+            <p>Sets: {workout.sets}</p>
+            <p>Reps: {workout.reps}</p>
+            <p>Weight: {workout.weight}</p>
+          </li>
+        ))}
+        </ul>
+      </div>
+      </div>
+    ) : (
+      <p>No workout selected</p>
+    )}
+  </div>
+</div>
+
+
       </div>
     </div>
   );
