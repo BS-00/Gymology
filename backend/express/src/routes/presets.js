@@ -115,6 +115,7 @@ router.post('/get-workouts', (req, res) => {
 
                 exercise_rows.forEach((e_row) => {
                     const exercise = {
+                        exercise_id: e_row.eid,
                         exercise_name: e_row.name,
                         sets: e_row.sets,
                         reps: e_row.reps,
@@ -129,6 +130,7 @@ router.post('/get-workouts', (req, res) => {
                 //console.log("SEPARATION");
 
                 const workout = {
+                    workout_id: w_row.wid,
                     workout_name: w_row.name,
                     days_of_the_week: w_row.days,
                     exercises: mult_exercises

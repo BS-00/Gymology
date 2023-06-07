@@ -3,12 +3,14 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 interface Preset {
+  w_id: number,
   plan_name: string, 
   days_of_the_week: string[],
   workouts: Workout[]
 }
 
 interface Workout {
+  e_id: number,
   workout_name: string,
   sets: number,
   reps: number,
@@ -125,15 +127,20 @@ const PresetsList: React.FC = () => {
 
     type uidobject = {
       uid: number;
-      search: string;
+      //search: string;
     };
 
-    const uid_1: uidobject = {
-      uid: 1,
-      search: forsearch
+    if ( sessionStorage.getItem('uid') === undefined ||
+        sessionStorage.getItem('uid') === null ) {
+      throw new RangeError('NULL or Undefined uid; Check Login!');
+    }
+
+    const uid_holder: uidobject = {
+      uid: Number(sessionStorage.getItem('uid'))
+      //search: forsearch
     };
 
-    await axios.post('http://localhost:3001/get-workouts', uid_1).then(
+    await axios.post('http://localhost:3001/get-workouts', uid_holder).then(
       res => {
         //let m_res_data: Preset[] = [];
         //m_res_data = res.data;
@@ -149,6 +156,7 @@ const PresetsList: React.FC = () => {
           w_row.exercises.forEach((e_row: any) => {
             
             const curr_exercise = {
+              e_id: e_row.exercise_id,
               workout_name: e_row.exercise_name,
               sets: e_row.sets,
               reps: e_row.reps,
@@ -160,6 +168,7 @@ const PresetsList: React.FC = () => {
           });
 
           const curr_workout = {
+            w_id: w_row.workout_id,
             plan_name: w_row.workout_name,
             days_of_the_week: w_row.days_of_the_week,
             workouts: m_mult_exercises
@@ -191,13 +200,13 @@ const PresetsList: React.FC = () => {
             <div className="border" style={{ height: '450px', overflow: 'auto'}}>
             <ul>
               {filteredPresets.map((preset) => (
-                <li key={preset.plan_name}>
+                <li key={preset.w_id}>
                   <input
                     type="checkbox"
-                    checked={selectedPreset !==null && selectedPreset.plan_name === preset.plan_name}
+                    checked={selectedPreset !==null && selectedPreset.w_id === preset.w_id}
                     onChange={() => handlePresetChange(preset)}
                   />
-                  <label>{preset.plan_name}</label>
+                  <label>{preset.plan_name + ' DB_ID: ' + preset.w_id}</label>
                 </li>
               ))}
             </ul>
