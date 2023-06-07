@@ -29,7 +29,7 @@ function DaysOfWeekSelector(props: {onChange: (days: Array<string>) => void, id:
 	}
 	
 	return (
-		<div className="row px-0 mx-0 my-2">
+		<div className="row px-0 mx-0 my-1">
 			{days.map(val => (
 				<DayCheck onChange={updateSelectedDays} key={val} id={props.id+"-"+val} val={val} />
 			))}
