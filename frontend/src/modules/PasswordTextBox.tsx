@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 
 interface PasswordTextBoxProps {
   label: string;
+  onChange: (value: string) => void;
 }
 
-const PasswordTextBox: React.FC<PasswordTextBoxProps> = ({ label }) => {
+const PasswordTextBox: React.FC<PasswordTextBoxProps> = ({ label, onChange }) => {
   const [password, setPassword] = useState('');
   const [isValid, setIsValid] = useState(true);
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-    setIsValid(validatePassword(e.target.value));
+  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setPassword(value);
+    setIsValid(validatePassword(value));
+    onChange(value);
   };
 
   const validatePassword = (password: string) => {
@@ -29,7 +32,7 @@ const PasswordTextBox: React.FC<PasswordTextBoxProps> = ({ label }) => {
       />
       {!isValid && (
         <p style={{ color: 'red', margin: '4px 0', fontSize: '14px' }}>
-          Password should be at least 6 characters long
+          Password must be at least 6 characters long
         </p>
       )}
     </div>

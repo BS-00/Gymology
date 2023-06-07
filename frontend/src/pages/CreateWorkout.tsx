@@ -86,12 +86,14 @@ function CreateWorkout(): React.ReactElement {
               <IncNumInput onChange={val => setReps(val)} id="reps-input" label="Reps" minVal={1} />
               <IncNumInput onChange={val => setWeight(val)} id="weight-input" label="Weight (lbs)" minVal={0} amnt={10}/>
             </div>
-            <button type="submit" onClick={e => submitWorkout(e)} className="my-5 btn btn-primary">Create</button>
+            <div style={{ flexDirection: 'row'}}>
+              <button className="btn btn-primary" style={{ marginTop: '20px' }} onClick={e => addExercise(e)}>Add Exercise</button>
+              <button type="submit" onClick={e => submitWorkout(e)} className="my-5 btn btn-primary position-absolute bottom-0 end-0">Create</button>
+            </div>
           </form>
         </div>
         <div className="m-3 w-50 h-75">
-	  <h3 className="text text-center">Exercises</h3>
-	  <button className="btn btn-primary" onClick={e => addExercise(e)}>Add Exercise</button>  
+	  <h3 className="text text-center">Exercises</h3>  
 	  <div className="h-75 overflow-auto">
 	    {exerciseDisplays}
           </div>

@@ -20,6 +20,7 @@ app.use(bodyParser.json());
 //Routes
 app.use(require('./routes/create-workout'));
 app.use(require('./routes/presets'));
+app.use(require('./routes/signup'));
 
 //Express Server
 app.listen(process.env.EXPRESS_PORT, (err) => {

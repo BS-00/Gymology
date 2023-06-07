@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 
 interface EmailTextBoxProps {
   label: string;
+  onChange: (value: string) => void;
 }
 
-const EmailTextBox: React.FC<EmailTextBoxProps> = ({ label }) => {
+const EmailTextBox: React.FC<EmailTextBoxProps> = ({ label, onChange }) => {
   const [text, setText] = useState('');
   const [isValid, setIsValid] = useState(true);
 
-  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value);
-    setIsValid(validateEmail(e.target.value));
+  const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setText(value);
+    setIsValid(validateEmail(value));
+    onChange(value);
   };
 
   const validateEmail = (email: string) => {
