@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 interface Preset {
   plan_name: string;
@@ -107,11 +108,40 @@ const PresetsList: React.FC = () => {
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
+
+    //submitting a get
+    submituid(event.target.value);
+
   };
 
   const filteredPresets = presets.filter((preset) =>
     preset.plan_name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  //Added function to aide the connection
+  async function submituid(forsearch: string) {
+
+    type uidobject = {
+      uid: number;
+      search: string;
+    };
+
+    const uid_1: uidobject = {
+      uid: 1,
+      search: forsearch.toLowerCase()
+    };
+
+    try {
+    await axios.post('http://localhost:3001/get-workouts', uid_1).then(
+      res => {
+        console.log(res.data);
+      }
+    );
+    }
+    catch (e) {console.log(e)};
+    //console.log(res);
+  }
+
 
   return (
     <div className="container">
@@ -169,6 +199,7 @@ const PresetsList: React.FC = () => {
 };
 
 export default PresetsList;
+
 
 /*
 import React, { useState } from 'react';
