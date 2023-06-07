@@ -92,15 +92,17 @@ router.post('/get-workouts', (req, res) => {
 module.exports = router;
 */
 
+let mult_workouts = [];
 
 router.post('/get-workouts', (req, res) => {
     //console.log(req.body);
 
     queryDb(`SELECT * FROM Workouts WHERE uid = ${req.body.uid};`, //AND LOWER(name) LIKE CONCAT('%', ${req.body.search}, '%')
     (workout_rows) => {
+        
         //console.log(workout_rows);
 
-        let mult_workouts = [];
+        //let mult_workouts = [];
 
         workout_rows.forEach((w_row) => {
 
@@ -120,7 +122,7 @@ router.post('/get-workouts', (req, res) => {
                     };
                     
                     mult_exercises.push(exercise);
-                    //console.log(exercise);
+                    console.log(exercise);
                 });
                 
                 //console.log(mult_exercises);
@@ -139,6 +141,8 @@ router.post('/get-workouts', (req, res) => {
 
             });
 
+            //console.log(mult_workouts);
+
         });
 
 
@@ -150,9 +154,17 @@ router.post('/get-workouts', (req, res) => {
     //console.log(Workouts[2].workouts);  
 
     //console.log(mult_workouts);
-
+    //console.log("division");
+    //mult_workouts = [];
 
     });
+
+    console.log(mult_workouts);
+    console.log("division");
+    res.send(mult_workouts);
+    mult_workouts = [];
+
+    //res.send()
 
 });
 

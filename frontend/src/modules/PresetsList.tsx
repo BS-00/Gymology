@@ -1,18 +1,18 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 interface Preset {
-  plan_name: string;
-  days_of_the_week: string[];
-  workouts: Workout[];
+  plan_name: string, 
+  days_of_the_week: string[],
+  workouts: Workout[]
 }
 
 interface Workout {
-  workout_name: string;
-  sets: number;
-  reps: number;
-  weight: number;
+  workout_name: string,
+  sets: number,
+  reps: number,
+  weight: number
 }
 
 const PresetsList: React.FC = () => {
@@ -20,6 +20,7 @@ const PresetsList: React.FC = () => {
   const [selectedPreset, setSelectedPreset] = useState<Preset | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
 
+  /*
   useEffect(() => {
     const availablePresets: Preset[] = [
       {
@@ -101,6 +102,7 @@ const PresetsList: React.FC = () => {
 
     setPresets(availablePresets);
   }, []);
+  */
 
   const handlePresetChange = (preset: Preset) => {
     setSelectedPreset(preset);
@@ -128,18 +130,49 @@ const PresetsList: React.FC = () => {
 
     const uid_1: uidobject = {
       uid: 1,
-      search: forsearch.toLowerCase()
+      search: forsearch
     };
 
-    try {
     await axios.post('http://localhost:3001/get-workouts', uid_1).then(
       res => {
+        //let m_res_data: Preset[] = [];
+        //m_res_data = res.data;
+        
         console.log(res.data);
-      }
-    );
-    }
-    catch (e) {console.log(e)};
-    //console.log(res);
+
+        let m_res_data: Preset[] = [];
+
+        res.data.forEach((w_row: any) => {
+
+          let m_mult_exercises: Workout[] = [];
+
+          w_row.exercises.forEach((e_row: any) => {
+            
+            const curr_exercise = {
+              workout_name: e_row.exercise_name,
+              sets: e_row.sets,
+              reps: e_row.reps,
+              weight: e_row.weight
+            };
+            
+            m_mult_exercises.push(curr_exercise);
+
+          });
+
+          const curr_workout = {
+            plan_name: w_row.workout_name,
+            days_of_the_week: w_row.days_of_the_week,
+            workouts: m_mult_exercises
+          };
+
+          m_res_data.push(curr_workout);
+
+        });
+
+        console.log(m_res_data);
+        setPresets(m_res_data);
+    });
+    
   }
 
 
@@ -177,7 +210,7 @@ const PresetsList: React.FC = () => {
             {selectedPreset ? (
               <div>
                 <h3>{selectedPreset.plan_name}</h3>
-                <p>Days of the week: {selectedPreset.days_of_the_week.join(', ')}</p>
+                <p>Days of the week: {String(selectedPreset.days_of_the_week)}</p>
                 <h4>Workouts:</h4>
                 <div className="border" style={{ height: '350px', overflow: 'auto'}}>
                 <ul>
