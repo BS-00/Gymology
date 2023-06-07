@@ -123,7 +123,7 @@ router.post('/get-workouts', (req, res) => {
                     };
                     
                     mult_exercises.push(exercise);
-                    console.log(exercise);
+                    //console.log(exercise);
                 });
                 
                 //console.log(mult_exercises);
@@ -161,8 +161,8 @@ router.post('/get-workouts', (req, res) => {
 
     });
 
-    console.log(mult_workouts);
-    console.log("division");
+    //console.log(mult_workouts);
+    //console.log("division");
     res.send(mult_workouts);
     mult_workouts = [];
 

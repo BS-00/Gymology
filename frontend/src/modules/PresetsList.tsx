@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 interface Preset {
@@ -22,87 +22,40 @@ const PresetsList: React.FC = () => {
   const [selectedPreset, setSelectedPreset] = useState<Preset | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  /*
+
+  const fetchRef = useRef(false);
+
+useEffect(() => {
+  if (!fetchRef.current) {
+    const fetchDataInitially = async () => {
+      try {
+        let my_res_data = await submituid();
+        setPresets(my_res_data);
+        console.log('FETCHDATA INITIALLY CALLED!');
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchDataInitially();
+    fetchRef.current = true;
+  }
+}, []);
+
+/*
   useEffect(() => {
-    const availablePresets: Preset[] = [
-      {
-        plan_name: 'Beginner',
-        days_of_the_week: ['Monday', 'Wednesday', 'Friday'],
-        workouts: [
-          {
-            workout_name: 'Squats',
-            sets: 3,
-            reps: 10,
-            weight: 50,
-          },
-          {
-            workout_name: 'Push-ups',
-            sets: 3,
-            reps: 10,
-            weight: 0,
-          },
-        ],
-      },
+    const fetchDataInitially = async () => {
 
-      {
-        plan_name: 'Intermediate',
-        days_of_the_week: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        workouts: [
-          {
-            workout_name: 'Bench Press',
-            sets: 4,
-            reps: 8,
-            weight: 80,
-          },
-          {
-            workout_name: 'Deadlifts',
-            sets: 4,
-            reps: 8,
-            weight: 100,
-          },
-          {
-            workout_name: 'Pull-ups',
-            sets: 4,
-            reps: 6,
-            weight: 0,
-          },
-        ],
-      },
-
-      {
-        plan_name: 'Advanced',
-        days_of_the_week: ['Monday', 'Wednesday', 'Friday', 'Saturday'],
-        workouts: [
-          {
-            workout_name: 'Squat Clean',
-            sets: 5,
-            reps: 5,
-            weight: 120,
-          },
-          {
-            workout_name: 'Snatch',
-            sets: 5,
-            reps: 5,
-            weight: 100,
-          },
-          {
-            workout_name: 'Handstand Push-ups',
-            sets: 5,
-            reps: 8,
-            weight: 0,
-          },
-          {
-            workout_name: 'Plank',
-            sets: 3,
-            reps: 30,
-            weight: 0,
-          },
-        ],
-      },
-
-    ];
-
-    setPresets(availablePresets);
+      try {
+        let my_res_data = await submituid();
+        setPresets(my_res_data);
+        console.log('FETCHDATA INITIALLY CALLED!')
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+    fetchDataInitially();
   }, []);
   */
 
@@ -110,20 +63,24 @@ const PresetsList: React.FC = () => {
     setSelectedPreset(preset);
   };
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearch = async (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
 
+    try {
     //submitting a get
-    submituid(event.target.value);
-
+    let my_res_data = await submituid();
+    setPresets(my_res_data); 
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const filteredPresets = presets.filter((preset) =>
     preset.plan_name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  //Added function to aide the connection
-  async function submituid(forsearch: string) {
+  // FUNCTION THAT CONNECTS AND RETURNS THE USER'S WORKOUTS
+  async function submituid() { //forsearch: string
 
     type uidobject = {
       uid: number;
@@ -140,14 +97,16 @@ const PresetsList: React.FC = () => {
       //search: forsearch
     };
 
+    let m_res_data: Preset[] = [];
+
     await axios.post('http://localhost:3001/get-workouts', uid_holder).then(
       res => {
         //let m_res_data: Preset[] = [];
         //m_res_data = res.data;
         
-        console.log(res.data);
+        //console.log(res.data);
 
-        let m_res_data: Preset[] = [];
+        //let m_res_data: Preset[] = [];
 
         res.data.forEach((w_row: any) => {
 
@@ -179,9 +138,11 @@ const PresetsList: React.FC = () => {
         });
 
         console.log(m_res_data);
-        setPresets(m_res_data);
+        //setPresets(m_res_data);
     });
     
+    return m_res_data;
+
   }
 
 
