@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import EmailTextBox from '../modules/EmailTextBox';
 import PasswordTextBox from '../modules/PasswordTextBox';
+import axios from 'axios';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleEmailChange = (value: string) => {
     setEmail(value);
@@ -20,13 +23,26 @@ const Login = () => {
       window.alert('Email and Password are required.');
       return;
     }
-  
+
     if (!validateEmail(email) || !validatePassword(password)) {
       window.alert('Please enter valid email and password.');
       return;
     }
 
-    console.log('Logging in with email:', email, 'and password:', password);
+    setIsLoading(true);
+    axios
+      .post('http://localhost:3001/login', { email, password })
+      .then((response) => {
+        console.log('Login successful');
+        navigate('/');
+      })
+      .catch((error) => {
+        console.error('Login failed:', error);
+        window.alert('Login failed. Please try again.');
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const validateEmail = (email: string) => {
@@ -49,8 +65,9 @@ const Login = () => {
           onClick={handleLogin}
           className="my-2 btn btn-primary"
           style={{ width: '100%' }}
+          disabled={isLoading}
         >
-          Login
+          {isLoading ? 'Logging In...' : 'Login'}
         </button>
         <div style={{ marginTop: '8px', textAlign: 'center' }}>
           <span>Don't have an account? </span>
