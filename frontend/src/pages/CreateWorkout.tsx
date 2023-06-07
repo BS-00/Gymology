@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import IncNumInput from '../modules/IncNumInput';
 import DaysOfWeekSelector from '../modules/DaysOfWeekSelector';
 import Axios from 'axios';
@@ -30,6 +30,16 @@ function ExerciseDisplay(props: {exercise: ExerciseType}): React.ReactElement {
 }
 
 function CreateWorkout(): React.ReactElement {
+	const storedTheme = localStorage.getItem('theme');
+  	const [theme, setTheme] = useState(storedTheme || 'light');
+
+  	useEffect(() => {
+    	document.body.className = theme;
+  	}, [theme]);
+
+
+	const [exerciseDisplays, setExerciseDisplays] = useState<Array<React.ReactElement>>([]);
+	
 	const [workoutName, setWorkoutName] = useState<string>("");
 	const [days, setDays] = useState<Array<string>>([]);
 

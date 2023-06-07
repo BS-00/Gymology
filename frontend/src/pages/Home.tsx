@@ -13,26 +13,29 @@ function ButtonDisplay() {
           GYMOLOGY
         </h1>
       </div>
-      <div style={{ fontSize: '30px', marginTop: '300px', marginLeft: '50px', marginBottom: '50px', width: '300px' }}>
-        <ButtonComponent destination="/CreateWorkout" text="Create Workout" />
-      </div>
-      <div style={{ fontSize: '30px', marginTop: '50px', marginLeft: '50px', marginBottom: '100px', width: '300px' }}>
-        <ButtonComponent destination="/Presets" text="Presets" />
+      <div style={{display:'flex',flexDirection:'column'}}>
+        <div style={{ fontSize: '30px', marginTop: '230px', marginLeft: '270px', marginBottom: '50px', width: '300px' }}>
+          <ButtonComponent destination="/CreateWorkout" text="Create Workout" />
+        </div>
+        <div style={{ fontSize: '30px', marginTop: '30px', marginLeft: '270px', marginBottom: '100px', width: '300px' }}>
+          <ButtonComponent destination="/Presets" text="Presets" />
+        </div>
       </div>
     </>
   );
 }
 
 function Home(): React.ReactElement {
-  const [theme, setTheme] = useState('light');
+  const storedTheme = localStorage.getItem('theme');
+  const [theme, setTheme] = useState(storedTheme || 'light');
   const navigate = useNavigate();
+
   const toggleTheme = () => {
-    if (theme === 'light') {
-      setTheme('dark');
-    } else {
-      setTheme('light');
-    }
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
   };
+
   useEffect(() => {
     document.body.className = theme;
   }, [theme]);
