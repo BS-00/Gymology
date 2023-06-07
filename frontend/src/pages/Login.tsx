@@ -1,17 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,ChangeEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import EmailTextBox from '../modules/EmailTextBox';
 import PasswordTextBox from '../modules/PasswordTextBox';
 import axios from 'axios';
 
 const Login = () => {
+  const storedTheme = localStorage.getItem('theme');
+  	const [theme, setTheme] = useState(storedTheme || 'light');
+  	useEffect(() => {
+    	document.body.className = theme;
+  	}, [theme]);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if the user is already logged in
     if (sessionStorage.getItem('isLoggedIn')) {
       navigate('/');
     }
@@ -65,7 +70,7 @@ const Login = () => {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '200px' }}>
         <h1 style={{ textAlign: 'center' }}>Login</h1>
         <EmailTextBox label="Email" onChange={handleEmailChange} />
