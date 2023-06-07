@@ -1,4 +1,12 @@
+import React, { ChangeEvent, useEffect, useState } from 'react';
+
 function About(): React.ReactElement {
+  const storedTheme = localStorage.getItem('theme');
+  	const [theme, setTheme] = useState(storedTheme || 'light');
+
+  	useEffect(() => {
+    	document.body.className = theme;
+  	}, [theme]);
   return (
     <div className="container d-flex flex-column justify-content-between align-items-center" style={{ minHeight: '93vh' }}>
       <h1 className="display-3">About Gymology</h1>
