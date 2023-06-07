@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function DayCheck(props: {onChange: (val: string) => void, id: string, val: string}): React.ReactElement {
 	return (
@@ -13,6 +13,10 @@ function DaysOfWeekSelector(props: {onChange: (days: Array<string>) => void, id:
 	const days: Array<string> = ["M", "TU", "W", "TH", "F", "SA", "SU"];
 	const [selectedDays, setSelectedDays] = useState<Array<string>>([]);
 
+	useEffect(() => {
+		props.onChange(selectedDays);
+	}, [selectedDays]);
+	
 	function updateSelectedDays(val: string) {
 		//Day is already selected
 		if(selectedDays.includes(val)) {
@@ -22,7 +26,6 @@ function DaysOfWeekSelector(props: {onChange: (days: Array<string>) => void, id:
 			//Adds day to selected
 			setSelectedDays(oldSelectedDays => [...oldSelectedDays, val]);
 		}
-		props.onChange(selectedDays);
 	}
 	
 	return (

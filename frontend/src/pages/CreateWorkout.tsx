@@ -20,7 +20,7 @@ type WorkoutType = {
 
 function ExerciseDisplay(props: {name: String}): React.ReactElement {
     return (
-      <div className="text-center">
+		<div className="text-center">
 	      <p>{props.name}</p>
 	    </div>
     );
@@ -28,43 +28,43 @@ function ExerciseDisplay(props: {name: String}): React.ReactElement {
 
 function CreateWorkout(): React.ReactElement {
 	const [exerciseDisplays, setExerciseDisplays] = useState<Array<React.ReactElement>>([]);
-
-  const [workoutName, setWorkoutName] = useState<string>("");
-  const [days, setDays] = useState<Array<string>>([]);
+	
+	const [workoutName, setWorkoutName] = useState<string>("");
+	const [days, setDays] = useState<Array<string>>([]);
 
 	const [exercises, setExercises] = useState<Array<ExerciseType>>([]);
-  const [exerciseName, setExerciseName] = useState<string>("");
-  const [sets, setSets] = useState<number>(1);
-  const [reps, setReps] = useState<number>(1);
-  const [weight, setWeight] = useState<number>(1);
-
-  function addExercise(e: ChangeEvent<EventTarget>) {
-    e.preventDefault();
-
-    const exercise: ExerciseType = {
-      name: exerciseName,
-      sets: sets,
-      reps: reps,
-      weight: weight
-    };
-
-    setExercises(oldExercises => [...oldExercises,  exercise]);
-  }
-
-  async function submitWorkout(e: ChangeEvent<EventTarget>) {
-    e.preventDefault();
-
-    const workout: WorkoutType = {
-      name: workoutName,
-      days: days,
-      exercises: exercises
-    };
-
-    let res = await Axios.post('http://localhost:3001/create-workout', workout);
-    console.log(res.data);
-  }
-
-  return (
+	const [exerciseName, setExerciseName] = useState<string>("");
+	const [sets, setSets] = useState<number>(1);
+	const [reps, setReps] = useState<number>(1);
+	const [weight, setWeight] = useState<number>(1);
+	
+	function addExercise(e: ChangeEvent<EventTarget>) {
+		e.preventDefault();
+		
+		const exercise: ExerciseType = {
+			name: exerciseName,
+			sets: sets,
+			reps: reps,
+			weight: weight
+		};
+		
+		setExercises(oldExercises => [...oldExercises,  exercise]);
+	}
+	
+	async function submitWorkout(e: ChangeEvent<EventTarget>) {
+		e.preventDefault();
+		
+		const workout: WorkoutType = {
+			name: workoutName,
+			days: days,
+			exercises: exercises
+		};
+		
+		let res = await Axios.post('http://localhost:3001/create-workout', workout);
+		console.log(res.data);
+	}
+	
+	return (
     <>
       <div className="h-25">
         <h1 className="display-5 text-center">New workout</h1>
@@ -72,7 +72,7 @@ function CreateWorkout(): React.ReactElement {
       <div className="d-flex">
         <div className="w-50 d-flex flex-row h-75">
           <form className="container-fluid w-100">
-            <DaysOfWeekSelector onChange={selectedDays => {setDays(selectedDays)}} id="1"/>
+            <DaysOfWeekSelector onChange={selectedDays => setDays(selectedDays)} id="1"/>
             <div className="my-2 form-group">
               <label htmlFor="workout-name-input" className="form-label">Name</label>
               <input onChange={e => setWorkoutName(String(e.target.value))} id="workout-name-input" type="text" className="form-control" placeholder="Name"/>
