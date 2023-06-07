@@ -17,6 +17,19 @@ html, body, #root {
 }
 
 
+.light {
+  background-color: #185487;
+  color: #ffffff;
+}
+
+
+/* Dark theme */
+
+.dark {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
 
 /* Removes the small arrows on number input fields */
 /* Chrome, Safari, Edge */
