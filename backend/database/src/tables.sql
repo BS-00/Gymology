@@ -1,9 +1,10 @@
 CREATE TABLE Users (
 	uid SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-	email TEXT NOT NULL,
-	password TEXT NOT NULL,
+	email VARCHAR(255) NOT NULL,
+	password CHAR(128) NOT NULL,
 	
-	PRIMARY KEY(uid)
+	PRIMARY KEY(uid),
+	UNIQUE(email)
 );
 
 CREATE TABLE Workouts (

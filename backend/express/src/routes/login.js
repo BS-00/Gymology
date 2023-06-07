@@ -4,7 +4,7 @@ const queryDb = require('../databases/db.js').queryDb;
 
 router.post('/login', (req, res) => {
   const { email, password } = req.body;
-  const query = `SELECT * FROM Users WHERE email = '${email}' AND password = '${password}'`;
+  const query = `SELECT * FROM Users WHERE email = '${email}' AND password = SHA2(SHA2('${password+email}', 512), 512)`;
 
   queryDb(query, (rows) => {
     if (rows.length === 0) {
