@@ -14,7 +14,7 @@ function Presets(): React.ReactElement {
   	}, [theme]);
 
   return (
-    <div className="presets-page">
+    <div className="presets-page h-100">
       <PresetsList />
     </div>
   );
