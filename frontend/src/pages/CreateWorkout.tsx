@@ -25,7 +25,7 @@ function ExerciseDisplay(props: {index: number, exercise: ExerciseType, removeEx
 			<p className="col"> {String(props.exercise.sets)} </p>
 			<p className="col"> {String(props.exercise.reps)} </p>
 			<p className="col"> {String(props.exercise.weight)} </p>
-			<button onClick={e => props.removeExercise(props.index, e)} className="fs-3 p-0 m-0 col-sm btn btn-primary"><strong>-</strong></button>
+			<button onClick={e => props.removeExercise(props.index, e)} className="fs-3 p-0 m-0 col-sm btn btn-primary" style={{ backgroundColor: 'red' }} ><strong>-</strong></button>
 	    </div>
     );
 }
