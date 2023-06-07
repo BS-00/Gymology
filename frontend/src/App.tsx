@@ -9,7 +9,8 @@ import './themes.css';
 
 function App() {
   const navigate = useNavigate();
-  const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+  const isLoggedIn = true;
+  // const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
 
   useEffect(() => {
     if (!isLoggedIn) {
