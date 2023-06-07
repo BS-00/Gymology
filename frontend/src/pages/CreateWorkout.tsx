@@ -67,7 +67,7 @@ function CreateWorkout(): React.ReactElement {
 	return (
     <>
       <div className="h-25">
-        <h1 className="display-5 text-center">New workout</h1>
+        <h1 className="display-5 text-center">Create Workout</h1>
       </div>
       <div className="d-flex">
         <div className="w-50 d-flex flex-row h-75">
