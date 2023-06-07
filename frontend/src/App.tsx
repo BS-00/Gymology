@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import AppRouter from './modules/AppRouter';
@@ -9,14 +9,18 @@ import './themes.css';
 
 function App() {
   const navigate = useNavigate();
-  const isLoggedIn = true;
-  // const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+  const location = useLocation();
+  const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+  const isLoginPage = location.pathname === '/Login';
+  const isSignUpPage = location.pathname === '/SignUp';
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!isLoggedIn && !isLoginPage && !isSignUpPage) {
       navigate('/Login');
     }
-  }, [navigate, isLoggedIn]);
+  }, [navigate, isLoggedIn, isLoginPage, isSignUpPage]);
+
+  const showNavBarAndFooter = isLoggedIn || isLoginPage || isSignUpPage;
 
   return (
     <>
