@@ -66,20 +66,21 @@ function CreateWorkout(): React.ReactElement {
 	}
 	
 	async function submitWorkout(e: ChangeEvent<EventTarget>) {
+		if (sessionStorage.getItem('uid') == null || 
+			sessionStorage.getItem('uid') == undefined) {
+			throw new RangeError('Uid is null or undefined');
+		}
+
+		const uid = sessionStorage.getItem('uid');
 		const workout: WorkoutType = {
 			name: workoutName,
 			days: days,
 			exercises: exercises
 		};
 		
-		await Axios.post('http://localhost:3001/create-workout', workout);
+		await Axios.post('http://localhost:3001/create-workout', {uid: uid, workout: workout});
 	}
-	
-	//Generates exercise displays with keys based on their current position in exercise display
-	let exerciseDisplays: Array<React.ReactElement> = [];
-	for(let i: number = 0; i < exercises.length; i++) {
-		exerciseDisplays.push();
-	}
+
 
 	return (
 		<>
