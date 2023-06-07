@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import EmailTextBox from '../modules/EmailTextBox';
 import PasswordTextBox from '../modules/PasswordTextBox';
 
 const SignUp = () => {
+
+  const storedTheme = localStorage.getItem('theme');
+  	const [theme, setTheme] = useState(storedTheme || 'light');
+
+  	useEffect(() => {
+    	document.body.className = theme;
+  	}, [theme]);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -43,7 +51,11 @@ const SignUp = () => {
       })
       .catch((error) => {
         console.error('Failed to sign up:', error);
-        window.alert('Sign up failed. Please try again.');
+        if (error.response && error.response.status === 409) {
+          window.alert('A user with that email already exists.');
+        } else {
+          window.alert('Sign up failed. Please try again.');
+        }
       })
       .finally(() => {
         setIsLoading(false);

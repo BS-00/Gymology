@@ -1,8 +1,8 @@
 {
-  "name": "workout-tracker-frontend",
+  "name": "Gymology-frontend",
   "version": "0.1.0",
   "description": "React app for tracking workout stats",
-  "homepage": "https://bs-00.github.io/Workout-Tracker/",
+  "homepage": "https://bs-00.github.io/Gymology/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -14,6 +14,7 @@
     "@types/react-dom": "^18.2.4",
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
+    "dotenv": "^16.1.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.1",

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ButtonComponent from '../modules/Button';
-import imageSrc from '../modules/Icon.png';
+import imageSrc from '../assets/Icon.png';
 import '../themes.css';
 
 function ButtonDisplay() {
@@ -13,7 +13,7 @@ function ButtonDisplay() {
           GYMOLOGY
         </h1>
       </div>
-      <div style={{display:'flex',flexDirection:'column'}}>
+      <div style={{position: 'fixed', display:'flex',flexDirection:'column'}}>
         <div style={{ fontSize: '30px', marginTop: '230px', marginLeft: '270px', marginBottom: '50px', width: '300px' }}>
           <ButtonComponent destination="/CreateWorkout" text="Create Workout" />
         </div>
@@ -28,6 +28,7 @@ function ButtonDisplay() {
 function Home(): React.ReactElement {
   const storedTheme = localStorage.getItem('theme');
   const [theme, setTheme] = useState(storedTheme || 'light');
+  const [userEmail, setUserEmail] = useState('');
   const navigate = useNavigate();
 
   const toggleTheme = () => {
@@ -38,6 +39,10 @@ function Home(): React.ReactElement {
 
   useEffect(() => {
     document.body.className = theme;
+    const email = sessionStorage.getItem('userEmail');
+    if (email) {
+      setUserEmail(email);
+    }
   }, [theme]);
 
   const handleLogout = () => {
@@ -67,6 +72,19 @@ function Home(): React.ReactElement {
           Log out
         </button>
       </div>
+      <div
+        style={{
+          position: 'fixed',
+          bottom: '50px',
+          left: '10px',
+          right: '0',
+          textAlign: 'left',
+          fontSize: '20px',
+        }}
+      >
+        Logged In as {userEmail}
+      </div>
+      
     </>
   );
 }

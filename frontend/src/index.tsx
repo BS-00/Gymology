@@ -9,9 +9,9 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <React.StrictMode>
-    <BrowserRouter basename="Workout-Tracker">
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>
+	<React.StrictMode>
+		<BrowserRouter basename="Gymology">
+		    <App />
+		</BrowserRouter>
+	</React.StrictMode>
 );

@@ -25,7 +25,7 @@ function ExerciseDisplay(props: {index: number, exercise: ExerciseType, removeEx
 			<p className="col"> {String(props.exercise.sets)} </p>
 			<p className="col"> {String(props.exercise.reps)} </p>
 			<p className="col"> {String(props.exercise.weight)} </p>
-			<button onClick={e => props.removeExercise(props.index, e)} className="fs-3 p-0 m-0 col-sm btn btn-primary"><strong>-</strong></button>
+			<button onClick={e => props.removeExercise(props.index, e)} className="fs-3 p-0 m-0 col-sm btn btn-primary" style={{ backgroundColor: 'red' }} ><strong>-</strong></button>
 	    </div>
     );
 }
@@ -78,7 +78,8 @@ function CreateWorkout(): React.ReactElement {
 			exercises: exercises
 		};
 		
-		await Axios.post('http://localhost:3001/create-workout', {uid: uid, workout: workout});
+		await Axios.post(process.env.REACT_APP_API_URL+'/create-workout',
+						 {uid: uid, workout: workout});
 	}
 
 
