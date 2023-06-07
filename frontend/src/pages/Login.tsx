@@ -49,6 +49,7 @@ const Login = () => {
         console.log('Login successful. User ID:', uid);
         sessionStorage.setItem('isLoggedIn', 'true'); 
         sessionStorage.setItem('uid', uid);
+        sessionStorage.setItem('userEmail', email);
         navigate('/');
       })
       .catch((error) => {
