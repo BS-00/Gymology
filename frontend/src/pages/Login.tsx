@@ -1,10 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,ChangeEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import EmailTextBox from '../modules/EmailTextBox';
 import PasswordTextBox from '../modules/PasswordTextBox';
 import axios from 'axios';
 
 const Login = () => {
+  const storedTheme = localStorage.getItem('theme');
+  	const [theme, setTheme] = useState(storedTheme || 'light');
+  	useEffect(() => {
+    	document.body.className = theme;
+  	}, [theme]);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
