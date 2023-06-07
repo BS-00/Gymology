@@ -48,6 +48,9 @@ function Home(): React.ReactElement {
       <div className={`App ${theme}`}>
         <button className="btn btn-primary position-absolute bottom-0 end-0" style={{backgroundColor: 'black', borderColor: 'white'}} onClick={toggleTheme}>Toggle Theme</button>
       </div>
+      <div>
+      <button className="btn btn-primary position-absolute bottom-0 start-0" style={{backgroundColor: 'black', borderColor: 'white'}} onClick={toggleTheme}>Log out</button>
+      </div>
     </>
   );
 }
