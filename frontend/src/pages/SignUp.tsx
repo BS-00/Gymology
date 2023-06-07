@@ -43,7 +43,11 @@ const SignUp = () => {
       })
       .catch((error) => {
         console.error('Failed to sign up:', error);
-        window.alert('Sign up failed. Please try again.');
+        if (error.response && error.response.status === 409) {
+          window.alert('A user with that email already exists.');
+        } else {
+          window.alert('Sign up failed. Please try again.');
+        }
       })
       .finally(() => {
         setIsLoading(false);

@@ -20,8 +20,6 @@ function App() {
     }
   }, [navigate, isLoggedIn, isLoginPage, isSignUpPage]);
 
-  const showNavBarAndFooter = isLoggedIn || isLoginPage || isSignUpPage;
-
   return (
     <>
       {isLoggedIn && <NavBar />}
