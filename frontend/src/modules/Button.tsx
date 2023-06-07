@@ -9,7 +9,7 @@ interface ButtonComponentProps {
 const ButtonComponent: React.FC<ButtonComponentProps> = ({ destination, text }) => {
   return (
     <Link to={destination}>
-      <button>
+      <button className="btn btn-primary btn-lg p-4 mx-6 " style ={{width: '100%'}}>
         {text}
       </button>
     </Link>
