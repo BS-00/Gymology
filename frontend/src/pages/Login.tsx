@@ -11,7 +11,6 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if the user is already logged in
     if (sessionStorage.getItem('isLoggedIn')) {
       navigate('/');
     }
