@@ -64,7 +64,7 @@ const Login = () => {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '200px' }}>
         <h1 style={{ textAlign: 'center' }}>Login</h1>
         <EmailTextBox label="Email" onChange={handleEmailChange} />
