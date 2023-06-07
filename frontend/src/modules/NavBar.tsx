@@ -16,7 +16,7 @@ function NavBar(): React.ReactElement {
           <Link to="/CreateWorkout" className="nav-link">Create Workout</Link>
         </li>
         <li className="nav-item">
-          <Link to="/Presets" className="nav-link">Presets</Link>
+          <Link to="/Presets" className="nav-link">Workouts</Link>
         </li>
         <li className="nav-item">
           <Link to="/About" className="nav-link">About</Link>
