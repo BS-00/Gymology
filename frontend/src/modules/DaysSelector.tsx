@@ -9,7 +9,7 @@ function DayCheck(props: {onChange: (val: string) => void, id: string, val: stri
 	);
 }
 
-function DaysOfWeekSelector(props: {onChange: (days: Array<string>) => void, id: string}): React.ReactElement {
+function DaysSelector(props: {onChange: (days: Array<string>) => void, id: string}): React.ReactElement {
 	const days: Array<string> = ["M", "TU", "W", "TH", "F", "SA", "SU"];
 	const [selectedDays, setSelectedDays] = useState<Array<string>>([]);
 
@@ -37,4 +37,4 @@ function DaysOfWeekSelector(props: {onChange: (days: Array<string>) => void, id:
 	);
 }
 
-export default DaysOfWeekSelector;
+export default DaysSelector;

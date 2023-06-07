@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import IncNumInput from '../modules/IncNumInput';
-import DaysOfWeekSelector from '../modules/DaysOfWeekSelector';
+import DaysSelector from '../modules/DaysSelector';
 import Axios from 'axios';
 
 
@@ -92,7 +92,7 @@ function CreateWorkout(): React.ReactElement {
 							<label htmlFor="workout-name-input" className="form-label">Name</label>
 							<input onChange={e => setWorkoutName(String(e.target.value))} id="workout-name-input" type="text" className="form-control" placeholder="Name"/>
 						</div>
-						<DaysOfWeekSelector onChange={selectedDays => setDays(selectedDays)} id="1"/>
+						<DaysSelector onChange={selectedDays => setDays(selectedDays)} id="1"/>
 						<button type="submit" onClick={e => submitWorkout(e)} className="btn btn-primary">Create</button>
 						<div className="my-5"></div>
 						<div className="exercise-input">
