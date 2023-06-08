@@ -151,6 +151,7 @@ useEffect(() => {
         const { uid, w_id } = selectedPreset;
         await axios.post('http://localhost:3001/delete-workout', { uid: u_id, wid: w_id });
         console.log('Workout deleted successfully');
+        window.location.reload();
       } else {
         console.log('No workout selected');
       }
