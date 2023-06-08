@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 interface Preset {
@@ -22,87 +22,40 @@ const PresetsList: React.FC = () => {
   const [selectedPreset, setSelectedPreset] = useState<Preset | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  /*
+
+  const fetchRef = useRef(false);
+
+useEffect(() => {
+  if (!fetchRef.current) {
+    const fetchDataInitially = async () => {
+      try {
+        let my_res_data = await submituid();
+        setPresets(my_res_data);
+        console.log('FETCHDATA INITIALLY CALLED!');
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchDataInitially();
+    fetchRef.current = true;
+  }
+}, []);
+
+/*
   useEffect(() => {
-    const availablePresets: Preset[] = [
-      {
-        plan_name: 'Beginner',
-        days_of_the_week: ['Monday', 'Wednesday', 'Friday'],
-        workouts: [
-          {
-            workout_name: 'Squats',
-            sets: 3,
-            reps: 10,
-            weight: 50,
-          },
-          {
-            workout_name: 'Push-ups',
-            sets: 3,
-            reps: 10,
-            weight: 0,
-          },
-        ],
-      },
+    const fetchDataInitially = async () => {
 
-      {
-        plan_name: 'Intermediate',
-        days_of_the_week: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        workouts: [
-          {
-            workout_name: 'Bench Press',
-            sets: 4,
-            reps: 8,
-            weight: 80,
-          },
-          {
-            workout_name: 'Deadlifts',
-            sets: 4,
-            reps: 8,
-            weight: 100,
-          },
-          {
-            workout_name: 'Pull-ups',
-            sets: 4,
-            reps: 6,
-            weight: 0,
-          },
-        ],
-      },
-
-      {
-        plan_name: 'Advanced',
-        days_of_the_week: ['Monday', 'Wednesday', 'Friday', 'Saturday'],
-        workouts: [
-          {
-            workout_name: 'Squat Clean',
-            sets: 5,
-            reps: 5,
-            weight: 120,
-          },
-          {
-            workout_name: 'Snatch',
-            sets: 5,
-            reps: 5,
-            weight: 100,
-          },
-          {
-            workout_name: 'Handstand Push-ups',
-            sets: 5,
-            reps: 8,
-            weight: 0,
-          },
-          {
-            workout_name: 'Plank',
-            sets: 3,
-            reps: 30,
-            weight: 0,
-          },
-        ],
-      },
-
-    ];
-
-    setPresets(availablePresets);
+      try {
+        let my_res_data = await submituid();
+        setPresets(my_res_data);
+        console.log('FETCHDATA INITIALLY CALLED!')
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+    fetchDataInitially();
   }, []);
   */
 
@@ -110,20 +63,24 @@ const PresetsList: React.FC = () => {
     setSelectedPreset(preset);
   };
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearch = async (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
 
+    try {
     //submitting a get
-    submituid(event.target.value);
-
+    let my_res_data = await submituid();
+    setPresets(my_res_data); 
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const filteredPresets = presets.filter((preset) =>
     preset.plan_name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  //Added function to aide the connection
-  async function submituid(forsearch: string) {
+  // FUNCTION THAT CONNECTS AND RETURNS THE USER'S WORKOUTS
+  async function submituid() { //forsearch: string
 
     type uidobject = {
       uid: number;
@@ -140,14 +97,16 @@ const PresetsList: React.FC = () => {
       //search: forsearch
     };
 
+    let m_res_data: Preset[] = [];
+
     await axios.post('http://localhost:3001/get-workouts', uid_holder).then(
       res => {
         //let m_res_data: Preset[] = [];
         //m_res_data = res.data;
         
-        console.log(res.data);
+        //console.log(res.data);
 
-        let m_res_data: Preset[] = [];
+        //let m_res_data: Preset[] = [];
 
         res.data.forEach((w_row: any) => {
 
@@ -179,59 +138,67 @@ const PresetsList: React.FC = () => {
         });
 
         console.log(m_res_data);
-        setPresets(m_res_data);
+        //setPresets(m_res_data);
     });
     
+    return m_res_data;
+
   }
 
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-6">
-          <div className="presets-list">
-            <h2>Search Workouts</h2>
-            <input
-              type="text"
-              placeholder="Search"
-              value={searchQuery}
-              onChange={handleSearch}
-            />
-            <div className="border" style={{ height: '450px', overflow: 'auto'}}>
-            <ul>
-              {filteredPresets.map((preset) => (
-                <li key={preset.w_id}>
-                  <input
-                    type="checkbox"
-                    checked={selectedPreset !==null && selectedPreset.w_id === preset.w_id}
-                    onChange={() => handlePresetChange(preset)}
-                  />
-                  <label>{preset.plan_name + ' DB_ID: ' + preset.w_id}</label>
-                </li>
-              ))}
-            </ul>
+    <div className="container h-100">
+      <div className="row h-100">
+
+        <div className="col" style={{ marginTop: "7%" }}>
+          <div className="presets-list h-100">
+            <div className="text-center">
+              <h2>Search Workouts</h2>
             </div>
-          </div>
-        </div>
-        <div className="col-6">
-          <div className="selectedpreset-contents">
-            <h2>Selected Workout</h2>
-            {selectedPreset ? (
-              <div>
-                <h3>{selectedPreset.plan_name}</h3>
-                <p>Days of the week: {String(selectedPreset.days_of_the_week)}</p>
-                <h4>Workouts:</h4>
-                <div className="border" style={{ height: '350px', overflow: 'auto'}}>
+            <div className="d-flex flex-column h-75 w-100">
+              <input
+                type="text"
+                placeholder="Search"
+                value={searchQuery}
+                onChange={handleSearch}
+              />
+              <div className="border h-100" style={{ overflow: 'auto', marginTop: '10px' }}>
                 <ul>
-                  {selectedPreset.workouts.map((workout, index) => (
-                    <li key={index}>
-                      <p>Workout Name: {workout.workout_name}</p>
-                      <p>Sets: {workout.sets}</p>
-                      <p>Reps: {workout.reps}</p>
-                      <p>Weight: {workout.weight}</p>
+                  {filteredPresets.map((preset) => (
+                    <li key={preset.w_id}>
+                      <input
+                        type="checkbox"
+                        checked={selectedPreset !== null && selectedPreset.w_id === preset.w_id}
+                        onChange={() => handlePresetChange(preset)}
+                      />
+                      <label>{preset.plan_name + ' DB_ID: ' + preset.w_id}</label>
                     </li>
                   ))}
                 </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="col h-100 w-100">
+          <div className="selectedpreset-contents h-100 d-flex flex-column" style={{ alignItems: 'center', marginTop: "10%" }}>
+            <h2>Selected Workout</h2>
+            {selectedPreset ? (
+              <div className="h-100 d-flex flex-column" style={{ alignItems: 'center' }}>
+                <h3>{selectedPreset.plan_name}</h3>
+                <p>Days of the week: {String(selectedPreset.days_of_the_week)}</p>
+                <h4>Workouts:</h4>
+                <div className="border d-flex flex-column p-1 overflow-auto" style={{ width:"50vw" ,height:"25.5vw"}}>
+                  <ul className="h-100 m-0 p-0" style={{ listStyleType: 'none'}}>
+                    {selectedPreset.workouts.map((workout, index) => (
+                      <li key={index}>
+                        <p>Workout Name: {workout.workout_name}</p>
+                        <p>Sets: {workout.sets}</p>
+                        <p>Reps: {workout.reps}</p>
+                        <p>Weight: {workout.weight}</p>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             ) : (
