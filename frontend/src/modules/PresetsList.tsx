@@ -163,15 +163,19 @@ useEffect(() => {
                 onChange={handleSearch}
               />
               <div className="border h-100" style={{ overflow: 'auto', marginTop: '10px' }}>
-                <ul>
+              <ul className="list-group list-group-flush text-center">
                   {filteredPresets.map((preset) => (
-                    <li key={preset.w_id}>
-                      <input
-                        type="checkbox"
-                        checked={selectedPreset !== null && selectedPreset.w_id === preset.w_id}
-                        onChange={() => handlePresetChange(preset)}
-                      />
-                      <label>{preset.plan_name + ' DB_ID: ' + preset.w_id}</label>
+                    <li
+                      key={preset.w_id}
+                      className={`list-group-item ${
+                        selectedPreset !== null && selectedPreset.w_id === preset.w_id
+                          ? 'list-group-item-primary'
+                          : 'list-group-item-secondary'
+                      }`}
+                      onClick={() => handlePresetChange(preset)}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      {preset.plan_name} DB_ID: {preset.w_id}
                     </li>
                   ))}
                 </ul>
