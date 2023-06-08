@@ -135,13 +135,25 @@ useEffect(() => {
         const { uid, w_id } = selectedPreset;
         await axios.post('http://localhost:3001/complete-workout', { uid, wid: w_id });
         console.log('Workout completed successfully');
-        // Add any additional logic or state updates as needed
       } else {
         console.log('No workout selected');
       }
     } catch (error) {
       console.log('Error completing workout:', error);
-      // Handle the error if needed
+    }
+  };
+
+  const handleDeleteWorkout = async () => {
+    try {
+      if (selectedPreset) {
+        const { uid, w_id } = selectedPreset;
+        await axios.post('http://localhost:3001/delete-workout', { uid, wid: w_id });
+        console.log('Workout deleted successfully');
+      } else {
+        console.log('No workout selected');
+      }
+    } catch (error) {
+      console.log('Error deleting workout:', error);
     }
   };
 
@@ -207,7 +219,9 @@ useEffect(() => {
                 <button className="btn btn-primary mr-2" onClick={handleCompleteWorkout}>
                     Complete Workout
                 </button>
-                <button className="btn btn-danger">Delete Workout</button>
+                <button className="btn btn-danger" onClick={handleDeleteWorkout}>
+                  Delete Workout
+                </button>
               </div>
             )}
           </div>
