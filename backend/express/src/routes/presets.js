@@ -15,32 +15,25 @@ async function get_exercises(wid) {
       weight: e_row.weight
     });
   });
-
   return exercises;
 }
 
 async function get_workouts(uid) {
   let workouts = [];
   const workout_rows = await queryDb(`SELECT * FROM Workouts WHERE uid = ${uid};`);
-
   for(const w_row of workout_rows) {
-    console.log(w_row.wid);
-    const t = await get_exercises(w_row.wid);
-
     workouts.push({
       workout_id: w_row.wid,
       workout_name: w_row.name,
       days_of_the_week: w_row.days,
-      exercises: t
+      exercises: await get_exercises(w_row.wid)
     });
   }
   return workouts;
 }
 
 router.post('/get-workouts', async (req, res) => {
-  const w = await get_workouts(req.body.uid);
-  console.log(w);
-  res.send(w);
+  res.send(await get_workouts(req.body.uid));
 });
 
 module.exports = router;
