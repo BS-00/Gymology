@@ -1,25 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import Axios from 'axios';
 
-async function submituid() {
-  type uidobject = {
-    uid: number;
-  };
-
-  if (
-    sessionStorage.getItem('uid') === undefined ||
-    sessionStorage.getItem('uid') === null
-  ) {
-    throw new RangeError('NULL or Undefined uid; Check Login!');
+async function getHistory() {
+  if (sessionStorage.getItem('uid') === undefined ||
+      sessionStorage.getItem('uid') === null) {
+    throw new RangeError('Uid is Null or Undefined');
   }
 
-  const uid_holder: uidobject = {
+  const req: { uid: number } = {
     uid: Number(sessionStorage.getItem('uid'))
   };
 
   let workoutData: { name: string; dateTime: string }[] = [];
 
-  await axios.post('http://localhost:3001/get-workouts', uid_holder).then(
+  await Axios.post(process.env.REACT_APP_API_URL+'/history', req).then(
     (res) => {
       res.data.forEach((w_row: any) => {
         const workoutName = w_row.workout_name;
@@ -41,8 +35,8 @@ function History(): React.ReactElement {
   useEffect(() => {
     document.body.className = theme;
 
-    // Call the submituid function and set the retrieved workout data
-    submituid().then((data) => {
+    // Call the getHistory function and set the retrieved workout data
+    getHistory().then((data) => {
       setWorkoutData(data);
     });
   }, [theme]);
