@@ -18,7 +18,7 @@ function ButtonDisplay() {
           <ButtonComponent destination="/CreateWorkout" text="Create Workout" />
         </div>
         <div style={{ fontSize: '30px', marginTop: '30px', marginLeft: '270px', marginBottom: '100px', width: '300px' }}>
-          <ButtonComponent destination="/Presets" text="Presets" />
+          <ButtonComponent destination="/Presets" text="Workouts" />
         </div>
       </div>
     </>
