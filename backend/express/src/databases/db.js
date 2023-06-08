@@ -31,23 +31,21 @@ function initDb() {
 	return db_conn;
 }
 
-function queryDb(query, callback) {
+async function queryDb(query) {
 	if(db_conn == null) {
 		console.warn("Tried to query database without first initializing");
-		return false;
+		return null;
 	}
 
-	db_conn.query(query, (err, rows, fields) => {
-		if(err) {
-			console.warn("Failed to query " +
-						 process.env.MYSQL_DB_NAME +
-						 "\nExited with error: " + err);
-			return false;
-		}
-		callback(rows, fields);
-	});
-	
-	return true;
+	try {
+		return await new Promise((resolve, reject) => db_conn.query(query, (err, res) => {
+			if(err) reject(err);
+			else resolve(res);
+		}));
+  	} 
+	catch (err) {
+    	console.warn("Error querying database: ", err);
+  	}
 }
 
 function closeDb() {
