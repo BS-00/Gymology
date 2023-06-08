@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 interface Preset {
+  uid: number;
   w_id: number,
   plan_name: string, 
   days_of_the_week: string[],
@@ -109,6 +110,7 @@ useEffect(() => {
           });
 
           const curr_workout = {
+            uid: w_row.uid,
             w_id: w_row.workout_id,
             plan_name: w_row.workout_name,
             days_of_the_week: w_row.days_of_the_week,
@@ -127,6 +129,21 @@ useEffect(() => {
 
   }
 
+  const handleCompleteWorkout = async () => {
+    try {
+      if (selectedPreset) {
+        const { uid, w_id } = selectedPreset;
+        await axios.post('http://localhost:3001/complete-workout', { uid, wid: w_id });
+        console.log('Workout completed successfully');
+        // Add any additional logic or state updates as needed
+      } else {
+        console.log('No workout selected');
+      }
+    } catch (error) {
+      console.log('Error completing workout:', error);
+      // Handle the error if needed
+    }
+  };
 
   return (
     <div className="container h-100">
@@ -187,7 +204,9 @@ useEffect(() => {
             )}
              {selectedPreset && (
               <div className="mt-3">
-                <button className="btn btn-primary mr-2">Complete Workout</button>
+                <button className="btn btn-primary mr-2" onClick={handleCompleteWorkout}>
+                    Complete Workout
+                </button>
                 <button className="btn btn-danger">Delete Workout</button>
               </div>
             )}
