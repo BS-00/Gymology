@@ -132,8 +132,9 @@ useEffect(() => {
   const handleCompleteWorkout = async () => {
     try {
       if (selectedPreset) {
+        const u_id = sessionStorage.getItem('uid');
         const { uid, w_id } = selectedPreset;
-        await axios.post('http://localhost:3001/complete-workout', { uid, wid: w_id });
+        await axios.post('http://localhost:3001/complete-workout', { uid: u_id, wid: w_id });
         console.log('Workout completed successfully');
       } else {
         console.log('No workout selected');
@@ -146,8 +147,9 @@ useEffect(() => {
   const handleDeleteWorkout = async () => {
     try {
       if (selectedPreset) {
+        const u_id = sessionStorage.getItem('uid');
         const { uid, w_id } = selectedPreset;
-        await axios.post('http://localhost:3001/delete-workout', { uid, wid: w_id });
+        await axios.post('http://localhost:3001/delete-workout', { uid: u_id, wid: w_id });
         console.log('Workout deleted successfully');
       } else {
         console.log('No workout selected');
