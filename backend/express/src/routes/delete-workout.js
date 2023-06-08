@@ -5,12 +5,13 @@ const queryDb = require('../databases/db.js').queryDb;
 
 router.post('/delete-workout', async (req, res) => {
     const { uid, wid } = req.body;
-	const query_res = await queryDb(`DELETE FROM Workouts WHERE uid=${uid} AND wid=${wid};`);
+    const query1_res = await queryDb(`DELETE FROM Exercises WHERE wid='${wid}';`);
+    const query_res = await queryDb(`DELETE FROM Workouts WHERE uid='${uid}' AND wid='${wid}';`);
 
-	if(query_res === null ||
-	   query_res === undefined) {
-		throw new RangeError("Error removing workout");
-	}
+    if(query_res === null ||
+       query_res === undefined) {
+	throw new RangeError("Error removing workout");
+    }
 
     res.sendStatus(201);
 });
