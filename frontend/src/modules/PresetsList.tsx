@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
@@ -132,9 +131,8 @@ useEffect(() => {
   return (
     <div className="container h-100">
       <div className="row h-100">
-  
         <div className="col-4">
-          <div className="presets-list h-100 d-flex flex-column justify-content-center align-items-center">
+          <div className="presets-list h-100 d-flex flex-column justify-content-center align-items-center" > 
             <h2>Search Workouts</h2>
             <input
               type="text"
@@ -142,6 +140,7 @@ useEffect(() => {
               value={searchQuery}
               onChange={handleSearch}
               className="form-control mb-4"
+              style={{ width: '100%' }}
             />
             <div className="border overflow-auto">
               <ul className="list-group list-group-flush">
@@ -154,7 +153,7 @@ useEffect(() => {
                         : 'list-group-item-secondary'
                     }`}
                     onClick={() => handlePresetChange(preset)}
-                    style={{ cursor: 'pointer' }}
+                    style={{ cursor: 'pointer', width: '100%' }}
                   >
                     {preset.plan_name} (ID: {preset.w_id})
                   </li>
@@ -168,7 +167,7 @@ useEffect(() => {
           <div className="selectedpreset-contents h-100 d-flex flex-column align-items-center justify-content-center">
             <h2>Selected Workout</h2>
             {selectedPreset ? (
-              <div className="border p-4 overflow-auto" style={{ maxHeight: "60vh", width: "70%" }}>
+              <div className="border p-4 overflow-auto" style={{ maxHeight: '60vh', width: '100%' }}>
                 <h3>{selectedPreset.plan_name}</h3>
                 <p>Days of the week: {String(selectedPreset.days_of_the_week)}</p>
                 <h4>Workouts:</h4>
@@ -186,11 +185,18 @@ useEffect(() => {
             ) : (
               <p className="text-muted">No workout selected</p>
             )}
+             {selectedPreset && (
+              <div className="mt-3">
+                <button className="btn btn-primary mr-2">Complete Workout</button>
+                <button className="btn btn-danger">Delete Workout</button>
+              </div>
+            )}
           </div>
         </div>
       </div>
     </div>
   );
+  
 };  
 
 export default PresetsList;
