@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "concurrently \"cd ./frontend && npm start\" \"cd ./backend/express && npm start\"",
-    "deploy": "concurrently \"cd ./frontend && npm deploy\" \"cd ./backend/express && npm deploy\""
+      "deploy": "concurrently \"cd ./frontend && npm deploy\" \"cd ./backend/express && npm deploy\"",
+	  "postinstall": "concurrently \"cd ./frontend && npm install\" \"cd ./backend/express && npm install\""
   },
   "devDependencies": {
     "concurrently": "^8.0.1"
