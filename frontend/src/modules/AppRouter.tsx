@@ -8,6 +8,7 @@ import Login from '../pages/Login';
 import SignUp from '../pages/SignUp'
 import Presets from '../pages/Presets';
 import About from '../pages/About';
+import History from '../pages/History';
 
 function AppRouter() {
   return (
@@ -19,6 +20,7 @@ function AppRouter() {
         <Route path="/SignUp" element={<SignUp />}/>
         <Route path="/Presets" element={<Presets />}/>
         <Route path="/About" element={<About />}/>
+        <Route path="/History" element={<History />}/>
       </Routes>
     </div>
   );
