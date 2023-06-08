@@ -1,6 +1,5 @@
 require('dotenv').config({path: '../../.env'});
 const mysql = require('mysql');
-const assert = require('assert');
 
 let db_conn = null;
 
