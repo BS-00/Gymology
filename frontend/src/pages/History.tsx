@@ -42,20 +42,24 @@ function History(): React.ReactElement {
   }, [theme]);
 
   return (
-    <div className="d-flex flex-column align-items-center">
-      <h1>History Page</h1>
-      {workoutData.length > 0 ? (
-        <ul>
-          {workoutData.map((workout) => (
-            <li key={workout.name}>
-              <h2>{workout.name}</h2>
-              <p>Date and Time: {workout.dateTime}</p>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>Loading workout data...</p>
-      )}
+    <div className="container">
+      <h1 className="display-3 mt-4 text-center">
+        Workouts Completed
+      </h1>
+      <div className="border overflow" style={{ border: '1px solid white', overflow: 'auto' }}>
+        {workoutData.length > 0 ? (
+          <ul>
+            {workoutData.map((workout) => (
+              <li key={workout.name}>
+                <h2>{workout.name}</h2>
+                <p>Date and Time: {workout.dateTime}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Loading workout data...</p>
+        )}
+      </div>
     </div>
   );
 }
