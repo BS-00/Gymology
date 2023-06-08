@@ -1,15 +1,20 @@
-/* Default theme */
-
 .light {
-    background-color: #185487;
-    color: #ffffff;
-  }
-  
+  background-color: #185487;
+  color: #ffffff;
+}
 
-
-  /* Dark theme */
-
+/* Dark theme */
 .dark {
-    background-color: #1e1e1e;
-    color: #ffffff;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.light .btn-primary {
+  background-color: #ffffff;
+  color: #185487;
+}
+
+.dark .btn-primary {
+  background-color: #185487;
+  color: #ffffff;
 }

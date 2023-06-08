@@ -42,23 +42,6 @@ useEffect(() => {
   }
 }, []);
 
-/*
-  useEffect(() => {
-    const fetchDataInitially = async () => {
-
-      try {
-        let my_res_data = await submituid();
-        setPresets(my_res_data);
-        console.log('FETCHDATA INITIALLY CALLED!')
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  
-    fetchDataInitially();
-  }, []);
-  */
-
   const handlePresetChange = (preset: Preset) => {
     setSelectedPreset(preset);
   };
@@ -149,114 +132,65 @@ useEffect(() => {
   return (
     <div className="container h-100">
       <div className="row h-100">
-
-        <div className="col" style={{ marginTop: "7%" }}>
-          <div className="presets-list h-100">
-            <div className="text-center">
-              <h2>Search Workouts</h2>
+  
+        <div className="col-4">
+          <div className="presets-list h-100 d-flex flex-column justify-content-center align-items-center">
+            <h2>Search Workouts</h2>
+            <input
+              type="text"
+              placeholder="Search"
+              value={searchQuery}
+              onChange={handleSearch}
+              className="form-control mb-4"
+            />
+            <div className="border overflow-auto">
+              <ul className="list-group list-group-flush">
+                {filteredPresets.map((preset) => (
+                  <li
+                    key={preset.w_id}
+                    className={`list-group-item ${
+                      selectedPreset !== null && selectedPreset.w_id === preset.w_id
+                        ? 'list-group-item-primary'
+                        : 'list-group-item-secondary'
+                    }`}
+                    onClick={() => handlePresetChange(preset)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    {preset.plan_name} (ID: {preset.w_id})
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div className="d-flex flex-column h-75 w-100">
-              <input
-                type="text"
-                placeholder="Search"
-                value={searchQuery}
-                onChange={handleSearch}
-              />
-              <div className="border h-100" style={{ overflow: 'auto', marginTop: '10px' }}>
-              <ul className="list-group list-group-flush text-center">
-                  {filteredPresets.map((preset) => (
-                    <li
-                      key={preset.w_id}
-                      className={`list-group-item ${
-                        selectedPreset !== null && selectedPreset.w_id === preset.w_id
-                          ? 'list-group-item-primary'
-                          : 'list-group-item-secondary'
-                      }`}
-                      onClick={() => handlePresetChange(preset)}
-                      style={{ cursor: 'pointer' }}
-                    >
-                      {preset.plan_name} DB_ID: {preset.w_id}
+          </div>
+        </div>
+  
+        <div className="col-8">
+          <div className="selectedpreset-contents h-100 d-flex flex-column align-items-center justify-content-center">
+            <h2>Selected Workout</h2>
+            {selectedPreset ? (
+              <div className="border p-4 overflow-auto" style={{ maxHeight: "60vh", width: "70%" }}>
+                <h3>{selectedPreset.plan_name}</h3>
+                <p>Days of the week: {String(selectedPreset.days_of_the_week)}</p>
+                <h4>Workouts:</h4>
+                <ul className="list-group list-group-flush">
+                  {selectedPreset.workouts.map((workout, index) => (
+                    <li key={index} className="list-group-item">
+                      <p>Workout Name: {workout.workout_name}</p>
+                      <p>Sets: {workout.sets}</p>
+                      <p>Reps: {workout.reps}</p>
+                      <p>Weight: {workout.weight}</p>
                     </li>
                   ))}
                 </ul>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="col h-100 w-100">
-          <div className="selectedpreset-contents h-100 d-flex flex-column" style={{ alignItems: 'center', marginTop: "10%" }}>
-            <h2>Selected Workout</h2>
-            {selectedPreset ? (
-              <div className="h-100 d-flex flex-column" style={{ alignItems: 'center' }}>
-                <h3>{selectedPreset.plan_name}</h3>
-                <p>Days of the week: {String(selectedPreset.days_of_the_week)}</p>
-                <h4>Workouts:</h4>
-                <div className="border d-flex flex-column p-1 overflow-auto" style={{ width:"50vw" ,height:"25.5vw"}}>
-                  <ul className="h-100 m-0 p-0" style={{ listStyleType: 'none'}}>
-                    {selectedPreset.workouts.map((workout, index) => (
-                      <li key={index}>
-                        <p>Workout Name: {workout.workout_name}</p>
-                        <p>Sets: {workout.sets}</p>
-                        <p>Reps: {workout.reps}</p>
-                        <p>Weight: {workout.weight}</p>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
             ) : (
-              <p>No workout selected</p>
+              <p className="text-muted">No workout selected</p>
             )}
           </div>
         </div>
       </div>
     </div>
   );
-};
+};  
 
 export default PresetsList;
-
-
-/*
-import React, { useState } from 'react';
-
-function PresetsList(): React.ReactElement {
-  const [presets, setPresets] = useState<string[]>(['Beginner', 'Intermediate', 'Advanced']);
-  const [selectedPreset, setSelectedPreset] = useState<string | null>(null);
-
-  // adding custom plans to the presets
-  function addtoPresets(newcustom: string): void {
-    const nextPresets = [...presets, newcustom];
-    setPresets(nextPresets);
-  }
-
-  // handling the selection of a preset plan
-  const handlePresetSelection = (preset: string): void => {
-    if (preset === selectedPreset) {
-      setSelectedPreset(null);
-    } else {
-      setSelectedPreset(preset);
-    }
-  };
-
-  return (
-    <div>
-      {presets.map((preset) => (
-        <div key={preset}>
-          <label>
-            {preset}
-            <input
-              type="checkbox"
-              checked={selectedPreset === preset}
-              onChange={() => handlePresetSelection(preset)}
-            />
-          </label>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-export default PresetsList;
-*/
