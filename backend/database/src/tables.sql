@@ -12,6 +12,7 @@ CREATE TABLE Workouts (
 	uid SMALLINT UNSIGNED,
 	name TEXT NOT NULL,
 	days SET('M', 'TU', 'W', 'TH', 'F', 'SA', 'SU'),
+	completion_date DATETIME(0),
 		
 	PRIMARY KEY(wid),
 	FOREIGN KEY(uid)
