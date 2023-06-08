@@ -17,51 +17,53 @@ async function submituid() {
     uid: Number(sessionStorage.getItem('uid'))
   };
 
-  let workoutNames: string[] = [];
+  let workoutData: { name: string; dateTime: string }[] = [];
 
   await axios.post('http://localhost:3001/get-workouts', uid_holder).then(
     (res) => {
       res.data.forEach((w_row: any) => {
-        workoutNames.push(w_row.workout_name);
+        const workoutName = w_row.workout_name;
+        const dateTime = w_row.date_time; // Assuming the backend provides a field named 'date_time'
+
+        workoutData.push({ name: workoutName, dateTime: dateTime });
       });
     }
   );
 
-  return workoutNames;
+  return workoutData;
 }
 
 function History(): React.ReactElement {
   const storedTheme = localStorage.getItem('theme');
   const [theme, setTheme] = useState(storedTheme || 'light');
-  const [workoutNames, setWorkoutNames] = useState<string[]>([]);
+  const [workoutData, setWorkoutData] = useState<{ name: string; dateTime: string }[]>([]);
 
   useEffect(() => {
     document.body.className = theme;
 
-    // Call the submituid function and set the retrieved workout names
-    submituid().then((names) => {
-      setWorkoutNames(names);
+    // Call the submituid function and set the retrieved workout data
+    submituid().then((data) => {
+      setWorkoutData(data);
     });
   }, [theme]);
 
   return (
     <div className="d-flex flex-column align-items-center">
       <h1>History Page</h1>
-      {workoutNames.length > 0 ? (
+      {workoutData.length > 0 ? (
         <ul>
-          {workoutNames.map((name) => (
-            <li key={name}>{name}</li>
+          {workoutData.map((workout) => (
+            <li key={workout.name}>
+              <h2>{workout.name}</h2>
+              <p>Date and Time: {workout.dateTime}</p>
+            </li>
           ))}
         </ul>
       ) : (
-        <p>Loading workout names...</p>
+        <p>Loading workout data...</p>
       )}
     </div>
   );
 }
 
 export default History;
-
-
-//ill send the userID and the route will send me back all the workouts that are completed that match the user id
-//
