@@ -31,7 +31,7 @@ useEffect(() => {
       try {
         let my_res_data = await submituid();
         setPresets(my_res_data);
-        console.log('FETCHDATA INITIALLY CALLED!');
+        //console.log('FETCHDATA INITIALLY CALLED!');
       } catch (error) {
         console.log(error);
       }
@@ -49,13 +49,14 @@ useEffect(() => {
   const handleSearch = async (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
 
+    /*
     try {
-    //submitting a get
     let my_res_data = await submituid();
     setPresets(my_res_data); 
     } catch (error) {
       console.log(error);
     }
+    */
   };
 
   const filteredPresets = presets.filter((preset) =>
@@ -121,7 +122,7 @@ useEffect(() => {
 
         });
 
-        console.log(m_res_data);
+        //console.log(m_res_data);
         //setPresets(m_res_data);
     });
     
