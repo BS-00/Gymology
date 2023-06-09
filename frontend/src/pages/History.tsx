@@ -31,7 +31,7 @@ function History(): React.ReactElement {
   return (
     <div className="container-fluid">
       <div className="row justify-content-center">
-        <div className="col-8 mt-5">
+        <div className="col-lg-6 mt-5">
           <h1 className="display-4 text-center mb-4">Workouts Completed</h1>
           <div className="card border-0 shadow">
             <div
