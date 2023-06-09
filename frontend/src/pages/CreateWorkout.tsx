@@ -87,7 +87,7 @@ function CreateWorkout(): React.ReactElement {
 		<>
 			<h1 className="display-5 text-center">Create Workout</h1>
 			<div className="d-flex">
-				<div className="w-50 d-flex flex-row h-75 border-end">
+				<div className="mx-1 w-50 d-flex flex-row h-75 border-end">
 					<form className="container-fluid w-100">
 						<div className="my-2 form-group">
 							<label htmlFor="workout-name-input" className="form-label">Name</label>
@@ -110,9 +110,7 @@ function CreateWorkout(): React.ReactElement {
     							console.error('No Exercises Added! Please try again.');
     							window.alert('No Exercises Added! Please try again.');
 							}
-  							else {
-    							submitWorkout(e);
-  							}
+  							else submitWorkout(e);
 						}} className="btn btn-primary">Create</button>
 						<div className="my-5"></div>
 						<div className="exercise-input">
@@ -135,7 +133,7 @@ function CreateWorkout(): React.ReactElement {
 						}} >Add Exercise</button>
 					</form>
         		</div>
-				<div className="m-3 w-50 h-75">
+				<div className="m-4 w-50 h-75">
 					<h3 className="text text-center">Exercises</h3>  
 			        <div className="h-75 overflow-auto container">
 						<div className="row overflow-hidden border-bottom border-2">
@@ -145,9 +143,11 @@ function CreateWorkout(): React.ReactElement {
 							<h6 className="h6 col">Weight</h6>
 							<h6 className="h6 col">      </h6>
 						</div>
-						{exercises.map((exercise, i) => 
-							<ExerciseDisplay key={i} index={i} removeExercise={removeExercise} exercise={exercise} />
-						)}
+						<div className="overflow-y" style={{ maxHeight: "50vh" }}>
+							{exercises.map((exercise, i) => 
+								<ExerciseDisplay key={i} index={i} removeExercise={removeExercise} exercise={exercise} />
+							)}
+						</div>
 					</div>
 				</div>
       		</div>

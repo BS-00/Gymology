@@ -43,7 +43,7 @@ const Login = () => {
 
     setIsLoading(true);
     axios
-      .post('http://localhost:3001/login', { email, password })
+      .post(process.env.REACT_APP_API_URL+'/login', { email, password })
       .then((response) => {
         const { uid } = response.data; 
         console.log('Login successful. User ID:', uid);
