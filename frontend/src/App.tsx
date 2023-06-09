@@ -10,8 +10,8 @@ import './themes.css';
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
-  const isLoggedIn = true;
-  // const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+  // const isLoggedIn = true;
+  const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
   const isLoginPage = location.pathname === '/Login';
   const isSignUpPage = location.pathname === '/SignUp';
 
