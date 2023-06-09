@@ -132,6 +132,7 @@ function CreateWorkout(): React.ReactElement {
 							<h6 className="h6 col">Sets</h6>
 							<h6 className="h6 col">Reps</h6>
 							<h6 className="h6 col">Weight</h6>
+							<h6 className="h6 col">      </h6>
 						</div>
 						{exercises.map((exercise, i) => 
 							<ExerciseDisplay key={i} index={i} removeExercise={removeExercise} exercise={exercise} />

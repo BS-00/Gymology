@@ -176,7 +176,7 @@ useEffect(() => {
               className="form-control mb-4"
               style={{ width: '100%' }}
             />
-            <div className="border overflow-auto" style={{ width: '100%' }}>
+            <div className="border overflow-auto w-100" style={{ maxHeight: '60vh' }}>
               <ul className="list-group list-group-flush" style={{ flexWrap: 'nowrap' }}>
                 {filteredPresets.map((preset) => (
                   <li
@@ -194,8 +194,6 @@ useEffect(() => {
                 ))}
               </ul>
             </div>
-
-
           </div>
         </div>
   
