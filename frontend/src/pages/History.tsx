@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 
+type Exercises = {
+  name: string,
+  sets: number,
+  reps: number,
+  weight: number
+}
+
 type History = {
-	workout_name: string,
-	completion_date: string
+	completion_date: string,
+  workout_name: string,
+  exercises: Array<Exercises>
 }
 
 async function getHistory() {
-	if (sessionStorage.getItem('uid') === undefined ||
+	if(sessionStorage.getItem('uid') === undefined ||
 		sessionStorage.getItem('uid') === null) {
 		throw new RangeError('Uid is Null or Undefined');
 	}
@@ -49,6 +57,14 @@ function History(): React.ReactElement {
                     >
                       <h2 className="h5">{history.workout_name}</h2>
                       <p className="mb-0">Date and Time: {history.completion_date}</p>
+                      {history.exercises.map(exercise => {
+                        return (<div>
+                          <p className="text">{exercise.name}</p>
+                          <p className="text">{exercise.sets}</p>
+                          <p className="text">{exercise.reps}</p>
+                          <p className="text">{exercise.weight}</p>
+                        </div>);
+                      })}
                     </li>
                   ))
                 ) : (
