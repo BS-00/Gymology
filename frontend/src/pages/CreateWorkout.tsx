@@ -38,11 +38,11 @@ function CreateWorkout(): React.ReactElement {
     	document.body.className = theme;
   	}, [theme]);
 
-	const [workoutName, setWorkoutName] = useState<string>("");
-	const [days, setDays] = useState<Array<string>>([]);
+	const [workoutName, setWorkoutName] = useState<string>(""); //If this is "" it's invalid for Create
+	const [days, setDays] = useState<Array<string>>([]); //If this is [] it's invalid for Create
 
-	const [exercises, setExercises] = useState<Array<ExerciseType>>([]);
-	const [exerciseName, setExerciseName] = useState<string>("");
+	const [exercises, setExercises] = useState<Array<ExerciseType>>([]); //If this is [] it's invalid for Create
+	const [exerciseName, setExerciseName] = useState<string>(""); //If this is "" for add workouts it's invalid for Add Exercise
 	const [sets, setSets] = useState<number>(1);
 	const [reps, setReps] = useState<number>(1);
 	const [weight, setWeight] = useState<number>(0);
@@ -94,7 +94,14 @@ function CreateWorkout(): React.ReactElement {
 							<input onChange={e => setWorkoutName(String(e.target.value))} id="workout-name-input" type="text" className="form-control" placeholder="Name"/>
 						</div>
 						<DaysSelector onChange={selectedDays => setDays(selectedDays)} id="1"/>
-						<button type="submit" onClick={e => submitWorkout(e)} className="btn btn-primary">Create</button>
+						<button type="submit" onClick={ e => {
+  							if (workoutName === '' || days.length === 0 || exercises.length === 0) {
+    							console.error('Invalid Workout Prepped!');
+    							window.alert('Invalid Workout Prepped! Please try again.');
+  							} else {
+    							submitWorkout(e);
+  							}
+						}} className="btn btn-primary">Create</button>
 						<div className="my-5"></div>
 						<div className="exercise-input">
 							<div className="my-2 form-group">
@@ -105,7 +112,14 @@ function CreateWorkout(): React.ReactElement {
 							<IncNumInput onChange={val => setReps(val)} id="reps-input" label="Reps" minVal={1} />
 							<IncNumInput onChange={val => setWeight(val)} id="weight-input" label="Weight (lbs)" minVal={0} amnt={10}/>
 						</div>
-						<button className="btn btn-primary" onClick={e => addExercise(e)}>Add Exercise</button>
+						<button className="btn btn-primary" onClick={ e => {
+							if (exerciseName === '') {
+								console.error('Invalid Exercise Prepped!');
+								window.alert('Invalid Exercise Prepped! Please try again.');
+							} else {
+								addExercise(e);
+							}
+						}} >Add Exercise</button>
 					</form>
         		</div>
 				<div className="m-3 w-50 h-75">
