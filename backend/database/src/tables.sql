@@ -7,12 +7,22 @@ CREATE TABLE Users (
 	UNIQUE(email)
 );
 
+CREATE TABLE History (
+       hid SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+       uid SMALLINT UNSIGNED NOT NULL,
+       workout_name TEXT NOT NULL,
+       completion_date DATETIME NOT NULL,
+
+       PRIMARY KEY(hid),
+       FOREIGN KEY (uid)
+       	       REFERENCES Users(uid)
+);
+
 CREATE TABLE Workouts (
 	wid SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
 	uid SMALLINT UNSIGNED,
 	name TEXT NOT NULL,
 	days SET('M', 'TU', 'W', 'TH', 'F', 'SA', 'SU'),
-	completion_date DATETIME(0),
 		
 	PRIMARY KEY(wid),
 	FOREIGN KEY(uid)

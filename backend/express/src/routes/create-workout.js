@@ -5,7 +5,7 @@ const queryDb = require('../databases/db.js').queryDb;
 
 router.post('/create-workout', async (req, res) => {
 	const { uid, workout } = req.body;
-	const query_res = await queryDb(`INSERT INTO Workouts(uid, name, days, completion_date) VALUES('${uid}', '${workout.name}', '${workout.days.join()}', NULL);`);
+    const query_res = await queryDb(`INSERT INTO Workouts(uid, name, days) VALUES('${uid}', '${workout.name}', '${workout.days.join()}');`);
 	
 	if(query_res === null ||
 	   query_res === undefined) {
