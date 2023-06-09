@@ -59,10 +59,10 @@ function History(): React.ReactElement {
                       <p className="mb-0">Date and Time: {history.completion_date}</p>
                       {history.exercises.map(exercise => {
                         return (<div>
-                          <p className="text">{exercise.name}</p>
-                          <p className="text">{exercise.sets}</p>
-                          <p className="text">{exercise.reps}</p>
-                          <p className="text">{exercise.weight}</p>
+                          <p className="mb-1">Exercise Name: <strong>{exercise.name}</strong></p>
+                          <p className="mb-1">Sets: <strong>{exercise.sets}</strong></p>
+                          <p className="mb-1">Reps: <strong>{exercise.reps}</strong></p>
+                          <p className="mb-1">Weight: <strong>{exercise.weight}</strong></p>
                         </div>);
                       })}
                     </li>
