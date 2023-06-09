@@ -6,7 +6,7 @@ import Home from '../pages/Home';
 import CreateWorkout from '../pages/CreateWorkout';
 import Login from '../pages/Login';
 import SignUp from '../pages/SignUp'
-import Presets from '../pages/Presets';
+import Workouts from '../pages/Workouts';
 import About from '../pages/About';
 import History from '../pages/History';
 
@@ -18,7 +18,7 @@ function AppRouter() {
         <Route path="/CreateWorkout" element={<CreateWorkout />}/>
         <Route path="/Login" element={<Login />}/>
         <Route path="/SignUp" element={<SignUp />}/>
-        <Route path="/Presets" element={<Presets />}/>
+        <Route path="/Workouts" element={<Workouts />}/>
         <Route path="/About" element={<About />}/>
         <Route path="/History" element={<History />}/>
       </Routes>

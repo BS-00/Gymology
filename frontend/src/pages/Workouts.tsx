@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import PresetsList from '../modules/PresetsList';
+import WorkoutsLists from '../modules/WorkoutsList';
 
 // Reminder to make Bootstrap enhancements here
 
@@ -15,7 +15,7 @@ function Presets(): React.ReactElement {
 
   return (
     <div className="presets-page h-100">
-      <PresetsList />
+      <WorkoutsLists />
     </div>
   );
 }
