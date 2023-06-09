@@ -4,7 +4,7 @@ import WorkoutsLists from '../modules/WorkoutsList';
 // Reminder to make Bootstrap enhancements here
 
 
-function Presets(): React.ReactElement {
+function Workouts(): React.ReactElement {
 
   const storedTheme = localStorage.getItem('theme');
   	const [theme, setTheme] = useState(storedTheme || 'light');
@@ -14,10 +14,10 @@ function Presets(): React.ReactElement {
   	}, [theme]);
 
   return (
-    <div className="presets-page h-100">
+    <div className="workouts-page h-100">
       <WorkoutsLists />
     </div>
   );
 }
 
-export default Presets;
+export default Workouts;

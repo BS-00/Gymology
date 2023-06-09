@@ -1,25 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
-interface Preset {
+interface Workout {
   uid: number;
   w_id: number,
   plan_name: string, 
   days_of_the_week: string[],
-  workouts: Workout[]
+  exercises: Exercise[]
 }
 
-interface Workout {
+interface Exercise {
   e_id: number,
-  workout_name: string,
+  exercise_name: string,
   sets: number,
   reps: number,
   weight: number
 }
 
-const PresetsList: React.FC = () => {
-  const [presets, setPresets] = useState<Preset[]>([]);
-  const [selectedPreset, setSelectedPreset] = useState<Preset | null>(null);
+const WorkoutsList: React.FC = () => {
+  const [workouts, setWorkouts] = useState<Workout[]>([]);
+  const [selectedWorkout, setSelectedWorkout] = useState<Workout | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
 
 
@@ -30,7 +30,7 @@ useEffect(() => {
     const fetchDataInitially = async () => {
       try {
         let my_res_data = await submituid();
-        setPresets(my_res_data);
+        setWorkouts(my_res_data);
         //console.log('FETCHDATA INITIALLY CALLED!');
       } catch (error) {
         console.log(error);
@@ -42,8 +42,8 @@ useEffect(() => {
   }
 }, []);
 
-  const handlePresetChange = (preset: Preset) => {
-    setSelectedPreset(preset);
+  const handleWorkoutChange = (workout: Workout) => {
+    setSelectedWorkout(workout);
   };
 
   const handleSearch = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,8 +59,8 @@ useEffect(() => {
     */
   };
 
-  const filteredPresets = presets.filter((preset) =>
-    preset.plan_name.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredWorkouts = workouts.filter((workout) =>
+    workout.plan_name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   // FUNCTION THAT CONNECTS AND RETURNS THE USER'S WORKOUTS
@@ -81,7 +81,7 @@ useEffect(() => {
       //search: forsearch
     };
 
-    let m_res_data: Preset[] = [];
+    let m_res_data: Workout[] = [];
 
     await axios.post('http://localhost:3001/get-workouts', uid_holder).then(
       res => {
@@ -94,13 +94,13 @@ useEffect(() => {
 
         res.data.forEach((w_row: any) => {
 
-          let m_mult_exercises: Workout[] = [];
+          let m_mult_exercises: Exercise[] = [];
 
           w_row.exercises.forEach((e_row: any) => {
             
             const curr_exercise = {
               e_id: e_row.exercise_id,
-              workout_name: e_row.exercise_name,
+              exercise_name: e_row.exercise_name,
               sets: e_row.sets,
               reps: e_row.reps,
               weight: e_row.weight
@@ -115,7 +115,7 @@ useEffect(() => {
             w_id: w_row.workout_id,
             plan_name: w_row.workout_name,
             days_of_the_week: w_row.days_of_the_week,
-            workouts: m_mult_exercises
+            exercises: m_mult_exercises
           };
 
           m_res_data.push(curr_workout);
@@ -132,9 +132,9 @@ useEffect(() => {
 
   const handleCompleteWorkout = async () => {
     try {
-      if (selectedPreset) {
+      if (selectedWorkout) {
         const u_id = sessionStorage.getItem('uid');
-        const { uid, w_id } = selectedPreset;
+        const { uid, w_id } = selectedWorkout;
         await axios.post('http://localhost:3001/complete-workout', { uid: u_id, wid: w_id });
         console.log('Workout completed successfully');
         window.alert('Workout Completed');
@@ -148,9 +148,9 @@ useEffect(() => {
 
   const handleDeleteWorkout = async () => {
     try {
-      if (selectedPreset) {
+      if (selectedWorkout) {
         const u_id = sessionStorage.getItem('uid');
-        const { uid, w_id } = selectedPreset;
+        const { uid, w_id } = selectedWorkout;
         await axios.post('http://localhost:3001/delete-workout', { uid: u_id, wid: w_id });
         console.log('Workout deleted successfully');
         window.location.reload();
@@ -166,7 +166,7 @@ useEffect(() => {
     <div className="container h-100">
       <div className="row h-100">
         <div className="col-4">
-          <div className="presets-list h-100 d-flex flex-column justify-content-center align-items-center" > 
+          <div className="workouts-list h-100 d-flex flex-column justify-content-center align-items-center" > 
             <h2>Search Workouts</h2>
             <input
               type="text"
@@ -178,18 +178,18 @@ useEffect(() => {
             />
             <div className="border overflow-auto w-100" style={{ maxHeight: '60vh' }}>
               <ul className="list-group list-group-flush" style={{ flexWrap: 'nowrap' }}>
-                {filteredPresets.map((preset) => (
+                {filteredWorkouts.map((workout) => (
                   <li
-                    key={preset.w_id}
+                    key={workout.w_id}
                     className={`list-group-item ${
-                      selectedPreset !== null && selectedPreset.w_id === preset.w_id
+                      selectedWorkout !== null && selectedWorkout.w_id === workout.w_id
                         ? 'list-group-item-primary'
                         : 'list-group-item-secondary'
                     }`}
-                    onClick={() => handlePresetChange(preset)}
+                    onClick={() => handleWorkoutChange(workout)}
                     style={{ cursor: 'pointer', width: '100%', overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}
                   >
-                    <span title={preset.plan_name}>{preset.plan_name}</span>
+                    <span title={workout.plan_name}>{workout.plan_name}</span>
                   </li>
                 ))}
               </ul>
@@ -197,20 +197,20 @@ useEffect(() => {
           </div>
         </div>
         <div className="col-8">
-  <div className="selectedpreset-contents h-100 d-flex flex-column align-items-center justify-content-center">
+  <div className="selectedworkout-contents h-100 d-flex flex-column align-items-center justify-content-center">
     <h2>Selected Workout</h2>
-    {selectedPreset ? (
+    {selectedWorkout ? (
       <div className="border rounded p-4 overflow-auto" style={{ maxHeight: '60vh', width: '100%', outline: 'none' }}>
-        <h3>{selectedPreset.plan_name}</h3>
-        <p>Days of the week: {String(selectedPreset.days_of_the_week)}</p>
-        <h4>Workouts:</h4>
+        <h3>{selectedWorkout.plan_name}</h3>
+        <p>Days of the week: {String(selectedWorkout.days_of_the_week)}</p>
+        <h4>Exercises:</h4>
         <div className="list-group">
-          {selectedPreset.workouts.map((workout, index) => (
+          {selectedWorkout.exercises.map((exercise, index) => (
             <div key={index} className="list-group-item rounded p-3 mb-3">
-              <p className="mb-1">Exercise Name: {workout.workout_name}</p>
-              <p className="mb-1">Sets: {workout.sets}</p>
-              <p className="mb-1">Reps: {workout.reps}</p>
-              <p className="mb-1">Weight: {workout.weight}</p>
+              <p className="mb-1">Exercise Name: {exercise.exercise_name}</p>
+              <p className="mb-1">Sets: {exercise.sets}</p>
+              <p className="mb-1">Reps: {exercise.reps}</p>
+              <p className="mb-1">Weight: {exercise.weight}</p>
             </div>
           ))}
         </div>
@@ -218,7 +218,7 @@ useEffect(() => {
     ) : (
       <p className="text-muted">No workout selected</p>
     )}
-    {selectedPreset && (
+    {selectedWorkout && (
       <div className="mt-3">
         <button className="btn btn-primary mr-2" onClick={handleCompleteWorkout}>
           Complete Workout
@@ -237,4 +237,4 @@ useEffect(() => {
   
 };  
 
-export default PresetsList;
+export default WorkoutsList;
