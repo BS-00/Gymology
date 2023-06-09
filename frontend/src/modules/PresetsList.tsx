@@ -187,7 +187,7 @@ useEffect(() => {
                     onClick={() => handlePresetChange(preset)}
                     style={{ cursor: 'pointer', width: '100%' }}
                   >
-                    {preset.plan_name} (ID: {preset.w_id})
+                    {preset.plan_name}
                   </li>
                 ))}
               </ul>
