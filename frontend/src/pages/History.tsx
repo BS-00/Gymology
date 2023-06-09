@@ -29,30 +29,23 @@ function History(): React.ReactElement {
 	}, []);
 
   return (
-    <div className="container">
-      <h1 className="display-3 mt-4 text-center">Workouts Completed</h1>
-      <div
-        className="border overflow"
-        style={{
-          border: '1px solid white',
-          overflow: 'auto',
-          maxHeight: '400px',
-        }}
-      >
-        {histories.length > 0 ? (
-          <ul>
-            {histories.map((history, i) => {
-              return (
-                <li key={i}>
-                  <h2>{history.workout_name}</h2>
-                  <p>Date and Time: {history.completion_date}</p>
+    <div className="container mt-5">
+      <h1 className="display-4 text-center mb-4">Workout History</h1>
+      <div className="card border-0 shadow">
+        <div className="overflow-auto" style={{ maxHeight: '400px' }} id="historyContainer">
+          <ul className="list-group list-group-flush">
+            {histories.length > 0 ? (
+              histories.map((history, i) => (
+                <li className="list-group-item bg-transparent" key={i}>
+                  <h2 className="h5">{history.workout_name}</h2>
+                  <p className="mb-0">Date and Time: {history.completion_date}</p>
                 </li>
-              );
-            })}
+              ))
+            ) : (
+              <li className="list-group-item">Loading workout data...</li>
+            )}
           </ul>
-        ) : (
-          <p>Loading workout data...</p>
-        )}
+        </div>
       </div>
     </div>
   );
