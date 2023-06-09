@@ -136,6 +136,7 @@ useEffect(() => {
         const { uid, w_id } = selectedPreset;
         await axios.post('http://localhost:3001/complete-workout', { uid: u_id, wid: w_id });
         console.log('Workout completed successfully');
+        window.alert('Workout Completed');
       } else {
         console.log('No workout selected');
       }
