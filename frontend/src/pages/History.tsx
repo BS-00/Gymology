@@ -51,20 +51,25 @@ function History(): React.ReactElement {
                 {histories.length > 0 ? (
                   histories.map((history, i) => (
                     <li
-                      className="list-group-item bg-transparent"
+                      className="list-group-item bg-transparent border-0 rounded"
                       style={{ background: 'transparent' }}
                       key={i}
                     >
-                      <h2 className="h5">{history.workout_name}</h2>
-                      <p className="mb-0">Date and Time: {history.completion_date}</p>
-                      {history.exercises.map(exercise => {
-                        return (<div>
-                          <p className="mb-1">Exercise Name: <strong>{exercise.name}</strong></p>
-                          <p className="mb-1">Sets: <strong>{exercise.sets}</strong></p>
-                          <p className="mb-1">Reps: <strong>{exercise.reps}</strong></p>
-                          <p className="mb-1">Weight: <strong>{exercise.weight}</strong></p>
-                        </div>);
-                      })}
+                      <div className="card-body">
+                        <h2 className="h5">{history.workout_name}</h2>
+                        <p className="mb-0">Date and Time: {history.completion_date}</p>
+                        {history.exercises.map((exercise, j) => (
+                          <div key={j} className="card mt-3">
+                            <div className="card-body">
+                              <p className="mb-1">Exercise Name: <strong>{exercise.name}</strong></p>
+                              <p className="mb-1">Sets: <strong>{exercise.sets}</strong></p>
+                              <p className="mb-1">Reps: <strong>{exercise.reps}</strong></p>
+                              <p className="mb-1">Weight: <strong>{exercise.weight}</strong></p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      {i !== histories.length - 1 && <hr className="my-4" />} {/* Add line separator */}
                     </li>
                   ))
                 ) : (
