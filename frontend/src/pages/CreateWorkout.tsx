@@ -95,11 +95,22 @@ function CreateWorkout(): React.ReactElement {
 						</div>
 						<DaysSelector onChange={selectedDays => setDays(selectedDays)} id="1"/>
 						<button type="submit" onClick={ e => {
-  							if (workoutName === '' || days.length === 0 || exercises.length === 0) {
+							if (workoutName === '') {
 								e.preventDefault();
-    							console.error('Invalid Workout Prepped!');
-    							window.alert('Invalid Workout Prepped! Please try again.');
-  							} else {
+    							console.error('No Workout Name Provided! Please try again.');
+    							window.alert('No Workout Name Provided! Please try again.');
+							}
+							else if (days.length === 0) {
+								e.preventDefault();
+    							console.error('No Days of the Week Provided! Please try again.');
+    							window.alert('No Days of the Week Provided! Please try again.');
+							}
+							else if (exercises.length === 0) {
+								e.preventDefault();
+    							console.error('No Exercises Added! Please try again.');
+    							window.alert('No Exercises Added! Please try again.');
+							}
+  							else {
     							submitWorkout(e);
   							}
 						}} className="btn btn-primary">Create</button>
@@ -116,8 +127,8 @@ function CreateWorkout(): React.ReactElement {
 						<button className="btn btn-primary" onClick={ e => {
 							if (exerciseName === '') {
 								e.preventDefault();
-								console.error('Invalid Exercise Prepped!');
-								window.alert('Invalid Exercise Prepped! Please try again.');
+								console.error('No Exercise Name Provided! Please try again.');
+								window.alert('No Exercise Name Provided! Please try again.');
 							} else {
 								addExercise(e);
 							}
