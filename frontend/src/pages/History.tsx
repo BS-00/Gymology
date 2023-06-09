@@ -26,7 +26,7 @@ function History(): React.ReactElement {
 	
 	useEffect(() => {
 		getHistory().then(histories => setHistories(histories));
-	}, [])
+	}, []);
 
 	return (
     <div className="container">
