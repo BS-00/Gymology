@@ -175,24 +175,26 @@ useEffect(() => {
               className="form-control mb-4"
               style={{ width: '100%' }}
             />
-            <div className="border overflow-auto">
-              <ul className="list-group list-group-flush">
-                {filteredPresets.map((preset) => (
-                  <li
-                    key={preset.w_id}
-                    className={`list-group-item ${
-                      selectedPreset !== null && selectedPreset.w_id === preset.w_id
-                        ? 'list-group-item-primary'
-                        : 'list-group-item-secondary'
-                    }`}
-                    onClick={() => handlePresetChange(preset)}
-                    style={{ cursor: 'pointer', width: '100%' }}
-                  >
-                    {preset.plan_name}
-                  </li>
-                ))}
-              </ul>
-            </div>
+<div className="border overflow-auto" style={{ width: '100%' }}>
+  <ul className="list-group list-group-flush" style={{ flexWrap: 'nowrap' }}>
+    {filteredPresets.map((preset) => (
+      <li
+        key={preset.w_id}
+        className={`list-group-item ${
+          selectedPreset !== null && selectedPreset.w_id === preset.w_id
+            ? 'list-group-item-primary'
+            : 'list-group-item-secondary'
+        }`}
+        onClick={() => handlePresetChange(preset)}
+        style={{ cursor: 'pointer', width: '100%', overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}
+      >
+        <span title={preset.plan_name}>{preset.plan_name}</span>
+      </li>
+    ))}
+  </ul>
+</div>
+
+
           </div>
         </div>
   
