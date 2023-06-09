@@ -196,41 +196,41 @@ useEffect(() => {
             </div>
           </div>
         </div>
-  
         <div className="col-8">
-          <div className="selectedpreset-contents h-100 d-flex flex-column align-items-center justify-content-center">
-            <h2>Selected Workout</h2>
-            {selectedPreset ? (
-              <div className="border p-4 overflow-auto" style={{ maxHeight: '60vh', width: '100%' }}>
-                <h3>{selectedPreset.plan_name}</h3>
-                <p>Days of the week: {String(selectedPreset.days_of_the_week)}</p>
-                <h4>Workouts:</h4>
-                <ul className="list-group list-group-flush">
-                  {selectedPreset.workouts.map((workout, index) => (
-                    <li key={index} className="list-group-item">
-                      <p>Workout Name: {workout.workout_name}</p>
-                      <p>Sets: {workout.sets}</p>
-                      <p>Reps: {workout.reps}</p>
-                      <p>Weight: {workout.weight}</p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : (
-              <p className="text-muted">No workout selected</p>
-            )}
-             {selectedPreset && (
-              <div className="mt-3">
-                <button className="btn btn-primary mr-2" onClick={handleCompleteWorkout}>
-                    Complete Workout
-                </button>
-                <button className="btn btn-danger" onClick={handleDeleteWorkout}>
-                  Delete Workout
-                </button>
-              </div>
-            )}
-          </div>
+  <div className="selectedpreset-contents h-100 d-flex flex-column align-items-center justify-content-center">
+    <h2>Selected Workout</h2>
+    {selectedPreset ? (
+      <div className="border rounded p-4 overflow-auto" style={{ maxHeight: '60vh', width: '100%', outline: 'none' }}>
+        <h3>{selectedPreset.plan_name}</h3>
+        <p>Days of the week: {String(selectedPreset.days_of_the_week)}</p>
+        <h4>Workouts:</h4>
+        <div className="list-group">
+          {selectedPreset.workouts.map((workout, index) => (
+            <div key={index} className="list-group-item rounded p-3 mb-3">
+              <p className="mb-1">Exercise Name: {workout.workout_name}</p>
+              <p className="mb-1">Sets: {workout.sets}</p>
+              <p className="mb-1">Reps: {workout.reps}</p>
+              <p className="mb-1">Weight: {workout.weight}</p>
+            </div>
+          ))}
         </div>
+      </div>
+    ) : (
+      <p className="text-muted">No workout selected</p>
+    )}
+    {selectedPreset && (
+      <div className="mt-3">
+        <button className="btn btn-primary mr-2" onClick={handleCompleteWorkout}>
+          Complete Workout
+        </button>
+        <button className="btn btn-danger" onClick={handleDeleteWorkout}>
+          Delete Workout
+        </button>
+      </div>
+    )}
+  </div>
+</div>
+
       </div>
     </div>
   );
